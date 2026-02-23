@@ -1,0 +1,48 @@
+---
+title: "What a node looks like"
+description: "Outcome hypotheses, assertions with test links, and the spec file conventions."
+---
+
+Every node in the Spec Tree contains a spec, its tests, and a lock file. The spec file inside each node is `{slug}.md` — no type suffix, no numeric prefix.
+
+## Outcome nodes
+
+Outcome specs start with `## Outcome` — a hypothesis about what change the node will produce:
+
+```markdown title="status-rollup.md"
+## Outcome
+
+We believe that aggregating child node states into a parent status
+will let developers identify stale subtrees without inspecting
+each node individually.
+
+### Assertions
+
+- A parent with all valid children reports valid ([test](tests/status.unit.test.ts))
+- A parent with any stale child reports stale ([test](tests/status.unit.test.ts))
+- A parent with any needs-work child needs work ([test](tests/status.unit.test.ts))
+```
+
+Every assertion links to the test file meant to prove it — the `spx` CLI parses the Markdown AST to extract these links. The invariant: **every assertion must be covered by at least one test file.**
+
+The human writes the hypothesis and its assertions; the agent writes the tests and implementation to prove them.
+
+## Enabler nodes
+
+Enabler specs start with `## Enables` — describing what infrastructure this node provides and which nodes depend on it.
+
+## Cross-cutting assertions
+
+When a behavior spans multiple nodes, the assertion lives in the **lowest common ancestor**. The ancestor's spec captures cross-cutting behaviors; child nodes handle their local concerns. If an ancestor accumulates too many cross-cutting assertions, that is a signal to extract a shared enabler at a lower index.
+
+## Decision records
+
+**PDRs** (Product Decision Records) establish product constraints — pricing, compliance, retention — that must hold across a subtree.
+
+**ADRs** (Architecture Decision Records) capture technical choices. The human makes the decision; agents create the record and propagate changes through dependent nodes.
+
+Decision records sit as files in each directory, discoverable without opening any subdirectory.
+
+<Card title="Next: Building the tree" icon="arrow-right" href="/guide/building">
+  Learn about index numbering and growing the tree.
+</Card>

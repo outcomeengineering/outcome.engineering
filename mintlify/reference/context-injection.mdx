@@ -1,0 +1,55 @@
+---
+title: "Context injection"
+description: "The deterministic context injection algorithm — how the tree structure defines agent context."
+---
+
+## Algorithm
+
+The `spx` CLI walks the tree from the product level down to the target node. At each directory along the path:
+
+1. **Include the ancestor spec** (the `{slug}.md` of the current directory)
+2. **Include all lower-index siblings' specs** (index < target's index at this level)
+3. **Exclude test files** (`tests/` directories are never injected)
+4. **Exclude higher-index siblings** (index >= target's index at this level)
+
+## What gets included
+
+| Item | Included? |
+| --- | --- |
+| Product file (`*.product.md`) | Always |
+| Ancestor specs along the path | Always |
+| Lower-index sibling specs | Yes |
+| Lower-index sibling decision records | Yes |
+| Test files | Never |
+| Higher-index sibling specs | Never |
+
+## Example
+
+For target `54-spx-tree-interpretation.outcome/43-status-rollup.outcome`:
+
+```text
+spx/
+  spx-cli.product.md                     ← always (product)
+  15-tree-structure-contract.pdr.md       ← index 15 < 54
+  15-cli-framework.adr.md                ← index 15 < 54
+  21-test-harness.enabler/
+    test-harness.md                       ← index 21 < 54
+  32-parse-directory-tree.enabler/
+    parse-directory-tree.md               ← index 32 < 54
+  43-node-status.enabler/
+    node-status.md                        ← index 43 < 54
+  54-spx-tree-interpretation.outcome/
+    spx-tree-interpretation.md            ← ancestor
+    21-parent-child-links.enabler/
+      parent-child-links.md               ← index 21 < 43
+    43-status-rollup.outcome/             [TARGET]
+      status-rollup.md                    ← target spec
+```
+
+## Properties
+
+**Deterministic:** The same target always produces the same context set. No search, no embeddings, no tool defaults.
+
+**Reviewable:** A human can inspect the tree to see exactly what context an agent will receive.
+
+**Architectural signal:** If the payload routinely exceeds an agent's working set, the component is doing too much — decompose further.

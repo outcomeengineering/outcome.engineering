@@ -1,0 +1,43 @@
+---
+title: "Assertions"
+description: "Assertion format, test file links, and the coverage invariant."
+---
+
+## Format
+
+Assertions appear in the spec file under `### Assertions`:
+
+```markdown
+### Assertions
+
+- A parent with all valid children reports valid ([test](tests/status.unit.test.ts))
+- A parent with any stale child reports stale ([test](tests/status.unit.test.ts))
+- A parent with any needs-work child needs work ([test](tests/status.unit.test.ts))
+```
+
+Each assertion is a Markdown list item with a test file link.
+
+## Test file links
+
+Every assertion must include a Markdown link to the test file meant to prove it. The `spx` CLI parses the Markdown AST to extract these links.
+
+The link format is: `([test](relative/path/to/test.file))`
+
+Multiple assertions can link to the same test file. A test file can be linked from multiple assertions.
+
+## The coverage invariant
+
+**Every assertion must be covered by at least one test file.**
+
+The `spx` CLI validates this invariant. An assertion without a test link is invalid.
+
+## Who writes what
+
+- **The human** writes the outcome hypothesis and its assertions
+- **The agent** writes the tests and implementation to prove them
+
+## Cross-cutting assertions
+
+When a behavior spans multiple nodes, the assertion lives in the lowest common ancestor. The ancestor's spec captures cross-cutting behaviors; child nodes handle their local concerns.
+
+If an ancestor accumulates too many cross-cutting assertions, extract a shared enabler at a lower index.

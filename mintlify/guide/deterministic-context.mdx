@@ -1,0 +1,52 @@
+---
+title: "Deterministic context injection"
+description: "How the tree structure defines exactly what context an agent receives."
+---
+
+In most agentic workflows, context is assembled heuristically — search, embeddings, tool-use defaults. The selection is hard to review and unstable as the repo grows. The Spec Tree replaces this with deterministic context injection.
+
+## The algorithm
+
+The `spx` CLI walks the tree from the product level down to the target node and applies one structural rule: **at each directory along the path, inject all lower-index siblings' specs.** Ancestor specs along the path are always included. Test files are excluded.
+
+## Worked example
+
+If an agent is assigned `54-spx-tree-interpretation.outcome/43-status-rollup.outcome`:
+
+```text
+spx/
+  spx-cli.product.md                          ← product spec
+  15-tree-structure-contract.pdr.md            ← index 15 < 54
+  15-cli-framework.adr.md                      ← index 15 < 54
+  15-randomized-test-generation.adr.md         ← index 15 < 54
+  21-test-harness.enabler/
+    test-harness.md                            ← index 21 < 54
+  32-parse-directory-tree.enabler/
+    parse-directory-tree.md                    ← index 32 < 54
+  43-node-status.enabler/
+    node-status.md                             ← index 43 < 54
+  54-spx-tree-interpretation.outcome/
+    spx-tree-interpretation.md                 ← ancestor spec
+    21-parent-child-links.enabler/
+      parent-child-links.md                    ← index 21 < 43
+    43-status-rollup.outcome/                  [TARGET]
+      status-rollup.md                         ← target spec
+      tests/                                   — ignored
+    54-spx-tree-status.outcome/                — index 54 ≥ 43
+  76-cli-integration.outcome/                  — index 76 ≥ 54
+  87-e2e-workflow.outcome/                     — index 87 ≥ 54
+```
+
+The agent sees exactly the context the tree provides. It doesn't search the codebase for "prior art"; the tree provides the authoritative context deterministically.
+
+## Payload as architecture signal
+
+If the deterministic context payload for a single node routinely exceeds an agent's reliable working set, the tree is telling you the component is doing too much. The structure forces architectural boundaries: when a node requires too much context, it is a signal to decompose further.
+
+## Designed for tree browsers
+
+The tree is designed for filesystem browsers — VS Code, Neovim, JetBrains IDEs. When navigating to a node, a human opens the ancestor chain — the same deterministic context that injection provides to the agent. ADRs and PDRs sit as files in each directory, discoverable without opening any subdirectory.
+
+<Card title="Next: Lock files" icon="arrow-right" href="/guide/lock-files">
+  How lock files make drift visible.
+</Card>

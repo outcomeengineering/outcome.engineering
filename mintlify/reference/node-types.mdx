@@ -1,0 +1,59 @@
+---
+title: "Node types"
+description: "Enabler nodes, outcome nodes, product files, and decision records."
+---
+
+## Product file
+
+The root of every Spec Tree. Filename: `{product-name}.product.md`.
+
+Captures why the product should exist and what change in user behavior it aims to achieve.
+
+## Enabler nodes
+
+**Directory suffix:** `.enabler`
+
+Enabler nodes provide infrastructure that higher-index nodes depend on. They would be removed if all their dependents were retired.
+
+**Spec file convention:** `{slug}.md` starting with `## Enables`.
+
+```text
+21-test-harness.enabler/
+├── test-harness.md          # starts with ## Enables
+└── tests/
+    └── test-harness.unit.test.ts
+```
+
+## Outcome nodes
+
+**Directory suffix:** `.outcome`
+
+Outcome nodes express one hypothesis and the testable assertions that define its output.
+
+**Spec file convention:** `{slug}.md` starting with `## Outcome`.
+
+```text
+43-status-rollup.outcome/
+├── status-rollup.md          # starts with ## Outcome
+├── spx-lock.yaml
+└── tests/
+    └── status.unit.test.ts
+```
+
+## Decision records
+
+### ADR (Architecture Decision Record)
+
+**Filename:** `{index}-{slug}.adr.md`
+
+Technical choices that constrain implementation. ADRs sit as files within directories alongside the nodes they constrain.
+
+### PDR (Product Decision Record)
+
+**Filename:** `{index}-{slug}.pdr.md`
+
+Product constraints — pricing, compliance, retention — that must hold across a subtree.
+
+### Scope
+
+A decision at a given index constrains every sibling with a higher index and that sibling's descendants. Decisions at the same index are independent of each other.

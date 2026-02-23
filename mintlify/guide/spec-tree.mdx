@@ -1,0 +1,59 @@
+---
+title: "The Spec Tree"
+description: "A git-native product structure where each node co-locates a spec, its tests, and a lock file."
+---
+
+The **Spec Tree** is a git-native product structure, managed by the `spx` CLI. Every node co-locates a spec, its tests, and a lock file that binds them — tracking not just what changed, but what has been validated and whether that validation is still current.
+
+Remaining work is the set of assertions not yet satisfied or no longer current — progress measured by assertions validated, not tickets closed.
+
+## Why git-native?
+
+Git-native is deliberate: blob hashes, co-location, and deterministic context all depend on file content being in the repo. Agents are increasingly optimized for finding and editing local files; how well they navigate an organization's third-party knowledge base is not something to bet on.
+
+## Two node types
+
+**Enabler nodes** (`.enabler` suffix) exist to serve other nodes — infrastructure that would be removed if all its dependents were retired.
+
+**Outcome nodes** (`.outcome` suffix) each express one hypothesis and the testable assertions that define its output.
+
+Position in the tree implies scope: a `21-test-harness.enabler/` at the root level serves all nodes in the product; a `21-parent-child-links.enabler/` nested inside an outcome serves only its sibling nodes and their descendants.
+
+## Example
+
+```text title="Spec Tree of the spx CLI"
+spx/
+├── spx-cli.product.md
+├── 15-tree-structure-contract.pdr.md
+├── 15-cli-framework.adr.md
+├── 21-test-harness.enabler/
+│   ├── test-harness.md
+│   └── tests/
+│       └── test-harness.unit.test.ts
+├── 54-spx-tree-interpretation.outcome/
+│   ├── spx-tree-interpretation.md
+│   ├── 21-parent-child-links.enabler/
+│   ├── 43-status-rollup.outcome/
+│   └── 54-spx-tree-status.outcome/
+├── 76-cli-integration.outcome/
+│   └── cli-integration.md
+└── 87-e2e-workflow.outcome/
+    └── e2e-workflow.md
+```
+
+## Product file
+
+The tree starts with a product file: `{product-name}.product.md`. It captures why this product should exist and what change in user behavior it aims to achieve.
+
+## Growth is bounded
+
+A new node touches only its parent and ancestors, never its siblings. The tree need not be right from the start — fractional indexing absorbs insertions without renumbering, and because each lock file tracks only its own spec and tests, restructuring a subtree does not invalidate sibling nodes.
+
+<CardGroup cols={2}>
+  <Card title="Nodes" icon="circle-nodes" href="/guide/nodes">
+    What a node looks like inside.
+  </Card>
+  <Card title="Building the tree" icon="hammer" href="/guide/building">
+    Index numbering and growing the tree.
+  </Card>
+</CardGroup>

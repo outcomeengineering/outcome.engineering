@@ -1,0 +1,112 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "aspen",
+  "name": "Outcome Engineering",
+  "colors": {
+    "primary": "#f59e0b",
+    "light": "#f59e0b",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guide",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "guide/overview",
+              "guide/spec-tree",
+              "guide/nodes"
+            ]
+          },
+          {
+            "group": "Structure",
+            "pages": [
+              "guide/building",
+              "guide/deterministic-context",
+              "guide/lock-files"
+            ]
+          },
+          {
+            "group": "Practice",
+            "pages": [
+              "guide/operational-loop",
+              "guide/guidelines",
+              "guide/testing",
+              "guide/agent-skills"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Reference",
+        "groups": [
+          {
+            "group": "Spec Tree",
+            "pages": [
+              "reference/node-types",
+              "reference/index-numbering",
+              "reference/node-states"
+            ]
+          },
+          {
+            "group": "Files",
+            "pages": [
+              "reference/filesystem",
+              "reference/lock-file",
+              "reference/assertions"
+            ]
+          },
+          {
+            "group": "Tooling",
+            "pages": [
+              "reference/spx-cli",
+              "reference/context-injection"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/outcomeengineering/outcome.engineering",
+          "icon": "github"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/wordmark-dark-tight.svg",
+    "dark": "/logo/wordmark-light-tight.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/outcomeengineering/outcome.engineering"
+      }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "claude",
+      "chatgpt"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/outcomeengineering"
+    }
+  },
+  "description": "A methodology for spec-driven development with AI agents, centered on the Spec Tree."
+}

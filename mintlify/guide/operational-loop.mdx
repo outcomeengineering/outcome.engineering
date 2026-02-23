@@ -1,0 +1,51 @@
+---
+title: "The operational loop"
+description: "Three commands form the core loop: spx status, spx lock, spx verify."
+---
+
+## The commands
+
+```text
+$ spx status --tree 54-spx-tree-interpretation.outcome
+54-spx-tree-interpretation.outcome/    needs work (no lock file)
+  21-parent-child-links.enabler/       valid
+  43-status-rollup.outcome/            stale
+    status-rollup.md changed           (was a3b7c12, now 5e9f1d8)
+  54-spx-tree-status.outcome/          needs work (no lock file)
+
+$ spx lock 54-spx-tree-interpretation.outcome/43-status-rollup.outcome
+Running tests...
+  tests/status.unit.test.ts            3 passed
+Lock regenerated: 43-status-rollup.outcome/spx-lock.yaml
+
+$ spx verify --tree 54-spx-tree-interpretation.outcome
+54-spx-tree-interpretation.outcome/    needs work
+  21-parent-child-links.enabler/       valid
+  43-status-rollup.outcome/            valid
+  54-spx-tree-status.outcome/          needs work
+```
+
+## What each command does
+
+<Steps>
+  <Step title="spx status">
+    Reads the tree and shows node states without running tests. Compares blob hashes in lock files against current file content.
+  </Step>
+  <Step title="spx lock">
+    Runs tests and writes the lock file — only when all pass. If tests fail, exits with an error and leaves the existing lock file unchanged.
+  </Step>
+  <Step title="spx verify">
+    Compares hashes without running tests — cheap verification that the lock still holds.
+  </Step>
+  <Step title="spx verify --fix">
+    Verifies first, and if stale, locks. Designed for pre-commit hooks; in CI, `spx lock` must produce zero changes.
+  </Step>
+</Steps>
+
+## When tests fail
+
+If tests fail, `spx lock` exits with an error and leaves the existing lock file unchanged — the node remains in its previous state. The lock tracks spec-and-test currency, not implementation correctness.
+
+<Card title="Next: Guidelines" icon="arrow-right" href="/guide/guidelines">
+  Three guidelines that follow from these constraints.
+</Card>

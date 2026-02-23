@@ -1,0 +1,44 @@
+---
+title: "Lock files"
+description: "Git blob hashes binding spec content to test evidence, making drift visible before anyone runs a test."
+---
+
+## The lock file
+
+Each node's lock file is `spx-lock.yaml`:
+
+```yaml title="spx-lock.yaml"
+schema: spx-lock/v1
+blob: a3b7c12
+tests:
+  - path: tests/status.unit.test.ts
+    blob: 9d4e5f2
+```
+
+Every `blob` is a Git blob hash — the same content-addressable hash Git computes for file contents.
+
+## How drift becomes visible
+
+Edit `status-rollup.md` and its Git blob hash changes. The `blob` in the lock file no longer matches. The node is **stale** — visibly, before anyone runs a test. Change a test file and its `blob` breaks the same way.
+
+A mismatch between the lock file and the current state of spec or tests does not mean behavior changed — it means the evidence is stale. Tests detect behavioral drift; the lock makes it visible when the evidence needs refreshing.
+
+## Determinism
+
+Because the lock file contains only hashes — no timestamps — it is deterministic: writing it twice on the same state produces the same file. Two agents working on the same node with the same state produce identical lock files.
+
+## Merge strategy
+
+After a branch merge, lock files regenerate the same way `npm install` regenerates a package lock — but unlike package locks, the output is fully deterministic: discard both sides, relock, done.
+
+## Scope
+
+Each node's lock file tracks only its own spec and tests. Subtree validity is checked by walking the tree, examining each descendant independently. A leaf change does not invalidate the root.
+
+## Content-addressable, not path-dependent
+
+Because blob hashes track content, not paths, renaming a file does not invalidate its hash — update the path in the lock file and the blob still matches.
+
+<Card title="Next: The operational loop" icon="arrow-right" href="/guide/operational-loop">
+  spx status, spx lock, spx verify.
+</Card>

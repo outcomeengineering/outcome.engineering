@@ -1,0 +1,42 @@
+# Calls reusable workflow from spx-gh-actions
+#
+# Required setup:
+# 1. Add CLAUDE_CODE_OAUTH_TOKEN to repository secrets
+# 2. Adjust authorized_roles if needed
+
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    # Optional: Only run on specific file changes
+    # paths:
+    #   - "src/**/*.ts"
+    #   - "src/**/*.tsx"
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+  id-token: write
+
+jobs:
+  review:
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+      id-token: write
+    uses: simonheimlicher/spx-gh-actions/.github/workflows/claude-code-review.yml@main
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+    # Uncomment and modify to customize:
+    # with:
+    #   authorized_roles: '["OWNER", "MEMBER"]'
+    #   concurrency_cancel: true
+    #   custom_prompt: |
+    #     REPO: ${{ github.repository }}
+    #     PR NUMBER: ${{ github.event.pull_request.number }}
+    #
+    #     Focus your review on TypeScript type safety and test coverage.
+    #     Use `gh pr comment` to post your review.

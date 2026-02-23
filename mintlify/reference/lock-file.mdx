@@ -1,0 +1,44 @@
+---
+title: "Lock file reference"
+description: "spx-lock.yaml schema, blob hash mechanics, and key properties."
+---
+
+## Schema
+
+```yaml title="spx-lock.yaml"
+schema: spx-lock/v1
+blob: a3b7c12
+tests:
+  - path: tests/status.unit.test.ts
+    blob: 9d4e5f2
+  - path: tests/edge-cases.unit.test.ts
+    blob: 1f8a3e7
+```
+
+## Fields
+
+| Field | Description |
+| --- | --- |
+| `schema` | Schema version identifier (`spx-lock/v1`) |
+| `blob` | Git blob hash of the spec file (`{slug}.md`) |
+| `tests` | Array of test file entries |
+| `tests[].path` | Relative path to the test file from the node directory |
+| `tests[].blob` | Git blob hash of the test file |
+
+## Key properties
+
+**Deterministic:** Writing the lock file twice on the same state produces the same file. Two agents working on the same node with the same state produce identical lock files.
+
+**Content-addressable:** Blob hashes track content, not paths. Renaming a file does not invalidate its hash — update the path in the lock file and the blob still matches.
+
+**No timestamps:** The lock file contains only hashes. No timestamps, no author information.
+
+**Scoped:** Each node's lock file tracks only its own spec and tests. Subtree validity is checked by walking the tree.
+
+## When it's written
+
+`spx lock` writes the lock file only when all tests pass. If tests fail, the command exits with an error and leaves the existing lock file unchanged.
+
+## Merge conflicts
+
+After a branch merge, lock files regenerate deterministically: discard both sides, run `spx lock`, done. The output is fully deterministic because it depends only on current file content.

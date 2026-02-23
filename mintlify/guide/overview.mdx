@@ -1,0 +1,32 @@
+---
+title: "From outputs to outcomes"
+description: "Why specs are not for planning — and what changes when you treat them as the product's source of truth."
+---
+
+Over the past decade, product thinking moved from outputs to outcomes. Focusing on outcomes means iterating on outputs until a measurable outcome — typically a change in user behavior — is achieved or the hypothesis is scrapped.
+
+Outcome Engineering inverts a core assumption: **specs are not for planning.** The spec is the product's source of truth — what users should be able to do, expressed as testable assertions. Every spec begins with an outcome hypothesis: the reason this node exists, expressed as a belief about what change it will produce.
+
+## Three failure modes
+
+Three failure modes compound each other once a codebase outgrows a single context window.
+
+### Value drift
+
+When the spec captures only *what to build*, the product is defined by "what we did" rather than "what it is." Dead code accumulates because nobody can tie it back to a purpose. Change requests look arbitrary because the value function isn't in the artifact being changed.
+
+### Heuristic context
+
+Context selection in most agentic workflows is heuristic: grepping for keywords, embedding similarity, tool defaults. As the repo grows, the selection is hard to review and unstable from one run to the next.
+
+### Spec-test drift
+
+Even with specs and tests in the repo, the binding between them decays with every change. A spec evolves, tests still pass for the old behavior, and the repo no longer contains a reviewable signal of what is currently believed to be true.
+
+## The antidote
+
+The [Spec Tree](/guide/spec-tree) addresses all three: outcome hypotheses make value explicit, tree structure provides deterministic context, and lock files make spec-test drift visible.
+
+<Card title="Next: The Spec Tree" icon="arrow-right" href="/guide/spec-tree">
+  Learn how the Spec Tree works.
+</Card>

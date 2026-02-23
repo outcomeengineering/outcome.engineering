@@ -1,0 +1,43 @@
+---
+title: "Index numbering"
+description: "Sparse integer distribution for dependency ordering and fractional indexing for insertion."
+---
+
+## Numeric prefix (index)
+
+Every node and decision record has a numeric prefix that encodes dependency order within its directory. Lower index = dependency for higher-index siblings.
+
+```text
+├── 15-tree-structure-contract.pdr.md    # constrains everything ≥ 21
+├── 15-cli-framework.adr.md              # same index: independent of PDR above
+├── 21-test-harness.enabler/             # constrained by index 15
+├── 32-parse-directory-tree.enabler/     # constrained by indices 15, 21
+```
+
+Items at the same index are independent of each other.
+
+## Sparse integer distribution
+
+Prefixes use a sparse integer distribution to predictably space nodes and absorb future insertions. For an expected maximum of N nodes in a two-digit range (10–99):
+
+$$i_k = 10 + \left\lfloor k \times \frac{89}{N+1} \right\rfloor$$
+
+| N | Sequence |
+| --- | --- |
+| 3 | 32, 54, 76 |
+| 5 | 24, 39, 54, 69, 84 |
+| 7 | 21, 32, 43, 54, 65, 76, 87 |
+
+## Fractional indexing
+
+An escape hatch when a gap is fully exhausted. To insert between index 21 and 22:
+
+```text
+20.5-integration-harness.enabler/
+```
+
+Fractional indices sort correctly in filesystem browsers and avoid cascading renumbering.
+
+## Scope
+
+Indices are unique among siblings only. The same index can appear at different levels of the tree. Combined with the slug, each node is uniquely identifiable within its directory.

@@ -1,0 +1,74 @@
+---
+title: "Filesystem conventions"
+description: "Directory naming, spec file naming, test naming, and path derivation."
+---
+
+## Directory naming
+
+```
+{index}-{slug}.{type}/
+```
+
+- **index**: Numeric prefix (sparse integer distribution)
+- **slug**: Kebab-case descriptive name
+- **type**: `enabler` or `outcome`
+
+Examples:
+```text
+21-test-harness.enabler/
+54-spx-tree-interpretation.outcome/
+```
+
+## Spec file naming
+
+The spec file inside each node is `{slug}.md` — no type suffix, no numeric prefix.
+
+```text
+21-test-harness.enabler/
+└── test-harness.md           # not "21-test-harness.enabler.md"
+```
+
+## Decision record naming
+
+```
+{index}-{slug}.adr.md        # Architecture Decision Record
+{index}-{slug}.pdr.md        # Product Decision Record
+```
+
+Decision records sit as files within their directory, not as subdirectories.
+
+## Product file naming
+
+```
+{product-name}.product.md
+```
+
+At the root of the `spx/` directory.
+
+## Test directory
+
+Each node has a `tests/` subdirectory:
+
+```text
+43-status-rollup.outcome/
+├── status-rollup.md
+├── spx-lock.yaml
+└── tests/
+    └── status.unit.test.ts
+```
+
+## Test file naming
+
+```
+{name}.unit.test.{ext}
+{name}.integration.test.{ext}
+{name}.e2e.test.{ext}
+```
+
+## Lock file
+
+```
+spx-lock.yaml
+```
+
+One per node directory, at the same level as the spec file.

@@ -1,0 +1,66 @@
+---
+title: "Building the tree"
+description: "Index numbering, sparse integer distribution, fractional indexing, and growing the Spec Tree."
+---
+
+## Start with the product file
+
+```text
+spx/
+└── spx-cli.product.md
+```
+
+`spx-cli.product.md` captures why this product should exist and what change in user behavior it aims to achieve.
+
+## Decisions crystallize first
+
+A PDR establishes a product constraint; ADRs capture technical choices. The human makes the decision; agents create the record and propagate changes through dependent nodes.
+
+```text
+spx/
+├── spx-cli.product.md
+├── 15-tree-structure-contract.pdr.md
+├── 15-cli-framework.adr.md
+├── 15-randomized-test-generation.adr.md
+└── 21-test-harness.enabler/
+    ├── test-harness.md
+    └── tests/
+        └── test-harness.unit.test.ts
+```
+
+## Index numbering
+
+Numeric prefixes encode dependency order within each directory. A decision at a lower index constrains every sibling with a higher index — and that sibling's descendants. All three decisions share index 15: they are independent of each other but constrain everything at index 21 and above.
+
+### Sparse integer distribution
+
+Prefixes use a sparse integer distribution to predictably space nodes and absorb future insertions. For an expected maximum of N nodes distributed across a two-digit range (10–99):
+
+$$i_k = 10 + \left\lfloor k \times \frac{89}{N+1} \right\rfloor$$
+
+For N=7, this produces the sequence: 21, 32, 43, 54, 65, 76, 87.
+
+### Fractional indexing
+
+An escape hatch to avoid cascading renumbering when a gap is fully exhausted. To insert between `21-test-harness.enabler` and `22-e2e-harness.enabler`, use `20.5-integration-harness`.
+
+## Growing the tree
+
+Enablers build on each other at lower indices; outcomes deliver customer-facing value at higher indices. Adding a new outcome under an existing node means inserting a child:
+
+```text
+76-cli-integration.outcome/
+├── cli-integration.md
+├── 32-output-format.outcome/
+│   ├── output-format.md
+│   └── tests/
+│       └── output-format.unit.test.ts
+└── tests/
+    └── cli-integration.integration.test.ts
+```
+
+No sibling at the root level is affected. Growth is bounded: a new node touches only its parent and ancestors, never its siblings.
+
+<Card title="Next: Deterministic context" icon="arrow-right" href="/guide/deterministic-context">
+  How the tree structure defines what context agents receive.
+</Card>

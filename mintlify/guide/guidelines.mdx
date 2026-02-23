@@ -1,0 +1,35 @@
+---
+title: "Guidelines"
+description: "Three practical guidelines that follow from agents' inability to participate in conversations that produce tacit knowledge."
+---
+
+These are not abstractions; they are practical consequences of the fact that agents cannot participate in the conversations that produce tacit knowledge.
+
+## Always be converging
+
+> Iterate on a durable artifact in small, reviewable steps such that each step is reversible and repeatable, and each reduces uncertainty about what the system should do.
+
+Agents will get things wrong. Because every agent starts from the spec — not the implementation — mistakes do not compound: go back one step, try again with a different prompt or a different agent, and the spec anchors the retry.
+
+## Determinism unless creation is the goal
+
+> Never generate what can be derived deterministically.
+
+If you know what you want the agent to base its actions on, provide it as deterministic context and keep it from grepping the codebase. Wherever a deterministic mechanism can replace a probabilistic one, use it:
+
+- Curate context rather than letting agents search the codebase
+- Link traceability explicitly rather than inferring it
+- Let pre-commit hooks catch what agent judgment would miss
+- Reserve the generative capacity of agents for the parts that require it
+
+Global and local constraints — PDRs and ADRs — must be co-located with the specs they apply to.
+
+## Ask what matters
+
+> Expose the maximum leverage decisions, let the agent handle the rest.
+
+Any operational system must expose the highest leverage decisions to a human — either ex ante or ex post — and use the industriousness of agents to update all dependent decisions when you change them. The structure must separate intended behavior (spec) from whether that behavior holds (tests + lock file).
+
+<Card title="Next: Testing" icon="arrow-right" href="/guide/testing">
+  Testing philosophy for the Spec Tree.
+</Card>

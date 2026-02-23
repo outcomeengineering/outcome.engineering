@@ -1,0 +1,53 @@
+---
+title: "Outcome Engineering"
+description: "A methodology for spec-driven development with AI agents, centered on the Spec Tree."
+---
+
+Outcome Engineering is a methodology for building software with AI agents. The **Spec Tree** is a git-native product structure where each node co-locates a spec, its tests, and a lock file — tracking not just what changed, but what has been validated and whether that validation is still current.
+
+<CardGroup cols={2}>
+  <Card title="Get started" icon="rocket" href="/guide/overview">
+    From outputs to outcomes. Learn the Spec Tree, deterministic context, and the operational loop.
+  </Card>
+  <Card title="View on GitHub" icon="github" href="https://github.com/outcomeengineering/outcome.engineering">
+    Browse the source and contribute.
+  </Card>
+</CardGroup>
+
+## The Spec Tree
+
+Every node begins with an outcome hypothesis — a belief about what change it will produce. Assertions define testable claims. Lock files use Git blob hashes to make drift visible before anyone runs a test.
+
+```text title="spx-cli Spec Tree"
+spx/
+├── spx-cli.product.md
+├── 15-tree-structure-contract.pdr.md
+├── 15-cli-framework.adr.md
+├── 21-test-harness.enabler/
+│   ├── test-harness.md
+│   └── tests/
+│       └── test-harness.unit.test.ts
+├── 54-spx-tree-interpretation.outcome/
+│   ├── spx-tree-interpretation.md
+│   ├── 21-parent-child-links.enabler/
+│   └── 43-status-rollup.outcome/
+└── 76-cli-integration.outcome/
+    └── cli-integration.md
+```
+
+## Quick links
+
+<CardGroup cols={2}>
+  <Card title="The Spec Tree" icon="sitemap" href="/guide/spec-tree">
+    What the Spec Tree is, how it works, and why it exists.
+  </Card>
+  <Card title="Building the tree" icon="hammer" href="/guide/building">
+    Index numbering, fractional indexing, and growing your tree.
+  </Card>
+  <Card title="Deterministic context" icon="crosshairs" href="/guide/deterministic-context">
+    How the tree structure defines what context agents receive.
+  </Card>
+  <Card title="The spx CLI" icon="terminal" href="/reference/spx-cli">
+    spx status, spx lock, spx verify — the operational loop.
+  </Card>
+</CardGroup>

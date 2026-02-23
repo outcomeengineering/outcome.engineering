@@ -1,0 +1,51 @@
+---
+title: "Testing"
+description: "Three test levels, a 4-part progression, and the overarching question: what evidence do I need?"
+---
+
+The overarching question: **"What evidence do I need to convince the user that my code correctly implements the specification?"**
+
+## Three test levels
+
+<Tabs>
+  <Tab title="L1: Unit">
+    **Detection:** Algorithmic bugs, edge cases, invariant violations.
+
+    **Cost:** Cheap — milliseconds, low maintenance.
+
+    **When:** Always. Every node should have unit tests.
+  </Tab>
+  <Tab title="L2: Integration">
+    **Detection:** Race conditions, integration mismatches, contract violations.
+
+    **Cost:** Medium — seconds to minutes, medium maintenance.
+
+    **When:** When components interact across boundaries.
+  </Tab>
+  <Tab title="L3: E2E">
+    **Detection:** Workflow breaks, UX failures, real-world edge cases.
+
+    **Cost:** Expensive — minutes to hours, brittle.
+
+    **When:** Critical user-facing workflows only.
+  </Tab>
+</Tabs>
+
+## The 4-part progression
+
+Organize tests within each level:
+
+1. **Typical cases** — Named tests for the happy path
+2. **Edge cases** — Named tests for boundary conditions
+3. **Systematic coverage** — Loop-driven tests covering combinations
+4. **Property-based** — Generated tests checking invariants
+
+Level breadth: L1 gets all 4 parts (cheapest). L2 gets parts 1–2, maybe 3. L3 gets part 1 only (most expensive).
+
+## Trust the library
+
+Don't test argparse, Zod, or other well-tested libraries. Test your code that uses them.
+
+## Add lower levels for debuggability
+
+Only add L1 tests if the code is complex enough that debugging will be hard. The purpose of lower-level tests is to narrow the search space when something breaks.

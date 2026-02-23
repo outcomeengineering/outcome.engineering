@@ -1,0 +1,58 @@
+---
+title: "Agent skills"
+description: "Three skill layers that coordinate how agents work within the Spec Tree."
+---
+
+Agent skills are organized in three layers that ensure agents have the right context before doing work, and validate their output afterward.
+
+## Three layers
+
+### Foundation (load once per conversation)
+
+Foundation skills load methodology and validate context. They emit markers that action skills check before proceeding.
+
+- **understanding-spx** — Loads methodology, structure, and templates
+- **contextualizing-spx** — Ingests and validates the target artifact
+
+### Action (do the work)
+
+Action skills execute workflows. Each checks for foundation markers before proceeding.
+
+- **authoring-spx** — Create and extend specs
+- **decomposing-spx** — Decompose nodes into children
+- **refactoring-spx** — Structural moves and re-scoping
+- **aligning-spx** — Clarify, augment, align, deconflict
+
+### Contract (validate output)
+
+Contract skills synchronize spec-test consistency after action skills complete.
+
+- **testing-spx** — Ensures specs and tests are in agreement
+
+## Conversational flow
+
+All action skills follow a consistent flow:
+
+<Steps>
+  <Step title="Intake">
+    Understand what the user wants.
+  </Step>
+  <Step title="Foundation gate">
+    Verify methodology is loaded (check markers).
+  </Step>
+  <Step title="Target context gate">
+    Verify target artifacts are loaded.
+  </Step>
+  <Step title="Plan">
+    Design the approach.
+  </Step>
+  <Step title="Execute">
+    Do the work.
+  </Step>
+  <Step title="Contract gate">
+    Invoke testing-spx to validate.
+  </Step>
+  <Step title="Deliver">
+    Present results to the user.
+  </Step>
+</Steps>

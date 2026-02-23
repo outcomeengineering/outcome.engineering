@@ -1,0 +1,35 @@
+---
+title: "Node states"
+description: "Valid, stale, and needs work — how states are computed from the lock file."
+---
+
+## States
+
+| State | Meaning | Lock file |
+| --- | --- | --- |
+| **valid** | Lock file exists and all blob hashes match current content | Present, hashes match |
+| **stale** | Lock file exists but spec or test content has changed | Present, hashes mismatch |
+| **needs work** | No lock file exists | Absent |
+
+## How states are computed
+
+`spx status` computes state by comparing the blob hashes in `spx-lock.yaml` against the current Git blob hashes of the spec and test files:
+
+1. No `spx-lock.yaml` → **needs work**
+2. `spx-lock.yaml` exists, all blobs match → **valid**
+3. `spx-lock.yaml` exists, any blob mismatches → **stale**
+
+## Subtree state
+
+Subtree validity is checked by walking the tree and examining each descendant independently. A parent's effective state is the worst state among its children:
+
+- If any child needs work → parent needs work
+- If any child is stale → parent is stale
+- If all children are valid → parent is valid
+
+## State transitions
+
+- **needs work → valid**: Write spec, write tests, run `spx lock` (all pass)
+- **valid → stale**: Edit spec or test file (blob hash changes)
+- **stale → valid**: Run `spx lock` (all pass, lock regenerated)
+- **valid → needs work**: Delete lock file
