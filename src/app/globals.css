@@ -381,3 +381,17 @@ pre {
 .animation-delay-800 {
   animation-delay: 800ms;
 }
+
+/* ===== BLOG PROSE ===== */
+
+.prose-blog > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose-blog h2 {
+  margin-top: 2.5rem;
+}
+
+.prose-blog h3 {
+  margin-top: 2rem;
+}
