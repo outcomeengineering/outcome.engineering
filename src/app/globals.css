@@ -49,6 +49,11 @@
   --surface: rgba(23, 23, 23, 0.6);
   --surface-solid: #171717;
 
+  /* Node state colors */
+  --state-valid: #22c55e;
+  --state-stale: #f59e0b;
+  --state-needs-work: #737373;
+
   /* Radius */
   --radius: 0.5rem;
   --radius-lg: 0.75rem;
@@ -275,4 +280,104 @@ pre {
 
 .link-muted:hover {
   color: var(--accent);
+}
+
+/* ===== SPEC TREE VISUALIZATION ===== */
+
+/* Tree node base */
+.tree-node {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* Node type shape indicators */
+.node-enabler::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--state-valid);
+  flex-shrink: 0;
+}
+
+.node-outcome::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--state-valid);
+  flex-shrink: 0;
+}
+
+.node-product::before {
+  content: "";
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.node-decision::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--text-muted);
+  flex-shrink: 0;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* State modifiers override the ::before color */
+.node-state-valid::before {
+  background: var(--state-valid);
+}
+
+.node-state-stale::before {
+  background: var(--state-stale);
+}
+
+.node-state-needs-work::before {
+  background: var(--state-needs-work);
+}
+
+/* Tree connector: vertical line for nesting */
+.tree-connector {
+  border-left: 1px solid var(--border);
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+/* ===== GUIDELINES ===== */
+
+.guideline-quote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* ===== EXTENDED ANIMATION DELAYS ===== */
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+.animation-delay-800 {
+  animation-delay: 800ms;
 }
