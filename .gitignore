@@ -11,6 +11,10 @@ package-lock.json
 
 # testing
 /coverage
+/.coverage
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
 
 # next.js
 /.next/
@@ -36,4 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tooling
 .playwright-mcp/
+/dist/

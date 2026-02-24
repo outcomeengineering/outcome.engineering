@@ -382,6 +382,60 @@ pre {
   animation-delay: 800ms;
 }
 
+/* ===== SVG SPEC TREE ===== */
+
+/* Scroll container: 5x viewport to drive scroll progress */
+.spec-tree-scroll-container {
+  height: 500vh;
+  position: relative;
+}
+
+/* Sticky inner fills viewport while scrolling through container */
+.spec-tree-sticky-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 3rem 0 2rem;
+}
+
+/* SVG wrapper: sized by SVG content */
+.spec-tree-svg-wrapper {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fade hints for horizontal scroll on mobile */
+@media (max-width: 767px) {
+  .spec-tree-svg-wrapper {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%
+    );
+  }
+}
+
+/* SVG sizes naturally from viewBox aspect ratio */
+.spec-tree-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ===== BLOG PROSE ===== */
 
 .prose-blog > * + * {

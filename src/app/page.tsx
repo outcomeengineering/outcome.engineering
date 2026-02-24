@@ -5,7 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import OperationalLoopSection from "@/components/OperationalLoopSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
-import SpecTreeVisualization from "@/components/SpecTreeVisualization";
+import SpecTreeScrollContainer from "@/components/spec-tree/SpecTreeScrollContainer";
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
         <SolutionSection />
         <GuidelinesSection />
         <OperationalLoopSection />
-        <SpecTreeVisualization />
+        <SpecTreeScrollContainer />
         <CTASection />
         <Footer />
       </main>
