@@ -1,11 +1,11 @@
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import GuidelinesSection from "@/components/GuidelinesSection";
 import HeroSection from "@/components/HeroSection";
-import OperationalLoopSection from "@/components/OperationalLoopSection";
 import ProblemSection from "@/components/ProblemSection";
-import SolutionSection from "@/components/SolutionSection";
-import SpecTreeScrollContainer from "@/components/spec-tree/SpecTreeScrollContainer";
+import Section from "@/components/Section";
+import StoryStep from "@/components/StoryStep";
+import WhyOutcomesSection from "@/components/WhyOutcomesSection";
+import { principleSteps, specTreeSteps } from "@/lib/story-data";
 
 export default function Home() {
   return (
@@ -17,10 +17,24 @@ export default function Home() {
       <main className="min-h-screen flex flex-col">
         <HeroSection />
         <ProblemSection />
-        <SolutionSection />
-        <GuidelinesSection />
-        <OperationalLoopSection />
-        <SpecTreeScrollContainer />
+
+        <Section id="principles" title="Three principles for staying in control" maxWidthClass="max-w-5xl">
+          <div className="story-steps">
+            {principleSteps.map((step) => <StoryStep key={step.id} step={step} />)}
+          </div>
+        </Section>
+
+        <WhyOutcomesSection />
+
+        <Section id="spec-tree" title="The Spec Tree in practice" maxWidthClass="max-w-5xl">
+          <p className="text-[var(--text-secondary)] leading-relaxed">
+            A git-native directory structure where each node co-locates a spec, its tests, and a lock file.
+          </p>
+          <div className="story-steps">
+            {specTreeSteps.map((step) => <StoryStep key={step.id} step={step} />)}
+          </div>
+        </Section>
+
         <CTASection />
         <Footer />
       </main>

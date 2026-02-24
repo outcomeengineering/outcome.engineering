@@ -2,25 +2,25 @@ import Section from "@/components/Section";
 
 const failureModes = [
   {
-    title: "Value drift",
+    title: "Goal drifts out of sight",
     description:
-      "When the spec captures only what to build, the product is defined by \"what we did\" rather than \"what it is.\" Dead code accumulates because nobody can tie it back to a purpose. Change requests look arbitrary because the value function isn\u2019t in the artifact being changed.",
+      "Specs capture what to build, but not why it exists. Over time, the product is defined by what was built rather than what it should be. Dead code accumulates because nobody can tie it back to a purpose.",
   },
   {
-    title: "Heuristic context",
+    title: "Agents imitate whatever they find",
     description:
-      "Context selection in most agentic workflows is heuristic: grepping for keywords, embedding similarity, tool defaults. As the repo grows, the selection is hard to review and unstable from one run to the next.",
+      "Context selection is heuristic: grepping for keywords, embedding similarity, tool defaults. As the repo grows, agents pick up patterns without knowing which ones are current or correct.",
   },
   {
-    title: "Spec\u2013test drift",
+    title: "Instructions decay silently",
     description:
-      "Even with specs and tests in the repo, the binding between them decays with every change. A spec evolves, tests still pass for the old behavior, and the repo no longer contains a reviewable signal of what is currently believed to be true.",
+      "Specs evolve, but tests still pass for old behavior. The binding between what you intended and what the code does erodes with every change — and nothing signals the gap.",
   },
 ];
 
 export default function ProblemSection() {
   return (
-    <Section id="problem" title="Three failure modes of agentic development">
+    <Section id="problem" title="Three things quietly go wrong">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {failureModes.map((mode, index) => (
           <div

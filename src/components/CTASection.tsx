@@ -10,10 +10,10 @@ export default function CTASection() {
           id="cta-heading"
           className="text-2xl md:text-3xl font-display font-semibold tracking-tight mb-4"
         >
-          Start building with outcome hypotheses
+          Build with outcomes, not just features
         </h2>
         <p className="text-[var(--text-muted)] mb-8 leading-relaxed">
-          The Spec Tree is open source. Read the methodology, explore the CLI, or try it in your project.
+          The Spec Tree is open source. Read the methodology, explore the CLI, or try it in your next project.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a href="https://docs.outcome.engineering" className="btn-primary">
