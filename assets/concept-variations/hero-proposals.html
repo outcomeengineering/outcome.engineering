@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outcome Engineering — Hero Proposals v4</title>
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0a;
+      color: #eee;
+    }
+
+    .proposal-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      height: 52px;
+    }
+    .proposal-nav .label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #555;
+      margin-right: 1.4rem;
+      font-weight: 500;
+    }
+    .proposal-nav button {
+      padding: 0.5rem 1.1rem;
+      border: none;
+      background: none;
+      color: #666;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .proposal-nav button:hover {
+      color: #bbb;
+    }
+    .proposal-nav button.active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+    .proposal {
+      display: none;
+      min-height: 100vh;
+      padding-top: 52px;
+    }
+    .proposal.active {
+      display: block;
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 52px);
+      overflow: hidden;
+    }
+
+    /* ═══ A ═══ */
+    .hero-a {
+      background: linear-gradient(180deg, #0c1008 0%, #111a0e 40%, #0e150a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-a .layout {
+      display: flex;
+      align-items: center;
+      gap: 4.5rem;
+      max-width: 1200px;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-a .tree-col {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .hero-a .ann {
+      position: absolute;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .hero-a .ann-roots {
+      bottom: 8%;
+      left: -48px;
+      color: rgba(200, 170, 100, 0.5);
+    }
+    .hero-a .ann-branches {
+      top: 38%;
+      right: -60px;
+      color: rgba(170, 150, 120, 0.45);
+    }
+    .hero-a .ann-leaves {
+      top: 6%;
+      right: -52px;
+      color: rgba(120, 185, 90, 0.45);
+    }
+    .hero-a .text-col {
+      max-width: 460px;
+    }
+    .hero-a .eyebrow {
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(180, 200, 150, 0.45);
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+    .hero-a h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3.4rem;
+      line-height: 1.14;
+      color: #e8f0e0;
+      margin-bottom: 1.4rem;
+    }
+    .hero-a h1 .roots-word {
+      color: rgba(210, 180, 110, 0.9);
+    }
+    .hero-a h1 .leaves-word {
+      color: rgba(140, 210, 100, 0.9);
+      font-style: italic;
+    }
+    .hero-a .sub {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: rgba(190, 200, 175, 0.45);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-a .three-parts {
+      display: flex;
+      gap: 1.6rem;
+      margin-bottom: 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 1.4rem;
+    }
+    .hero-a .part {
+      flex: 1;
+    }
+    .hero-a .part .part-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .hero-a .part.roots-part .part-title {
+      color: rgba(210, 180, 110, 0.8);
+    }
+    .hero-a .part.branches-part .part-title {
+      color: rgba(170, 150, 120, 0.7);
+    }
+    .hero-a .part.leaves-part .part-title {
+      color: rgba(120, 185, 90, 0.8);
+    }
+    .hero-a .part .part-desc {
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: rgba(200, 200, 190, 0.35);
+    }
+    .hero-a .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.8rem;
+      border: 1px solid rgba(180, 200, 150, 0.18);
+      color: rgba(210, 230, 190, 0.75);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .hero-a .cta:hover {
+      background: rgba(180, 200, 150, 0.07);
+      border-color: rgba(180, 200, 150, 0.35);
+    }
+
+    /* ═══ B ═══ */
+    .hero-b {
+      display: flex;
+    }
+    .hero-b .left-panel {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(16, 26, 12, 1) 0%, rgba(12, 20, 9, 1) 46%, rgba(20, 16, 10, 1) 54%, rgba(18, 14, 9, 1) 100%);
+    }
+    .hero-b .ground-band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 8%, rgba(140, 110, 50, 0.18) 30%, rgba(140, 110, 50, 0.25) 50%, rgba(140, 110, 50, 0.18) 70%, transparent 92%);
+    }
+    .hero-b .zone-label {
+      position: absolute;
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .hero-b .zone-below {
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(200, 170, 100, 0.3);
+    }
+    .hero-b .zone-above {
+      top: 16%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(100, 165, 75, 0.3);
+    }
+    .hero-b .right-panel {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem 4.5rem;
+      background: #fafaf7;
+    }
+    .hero-b .right-panel .tag {
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8a9a7a;
+      margin-bottom: 1.8rem;
+      font-weight: 600;
+    }
+    .hero-b .right-panel h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      font-size: 2.8rem;
+      line-height: 1.2;
+      color: #1a1a1a;
+      margin-bottom: 1.3rem;
+    }
+    .hero-b .right-panel h1 .hl-amber {
+      color: #9a7a30;
+    }
+    .hero-b .right-panel h1 .hl-green {
+      color: #4a7a3a;
+    }
+    .hero-b .right-panel p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #777;
+      max-width: 400px;
+      margin-bottom: 1.8rem;
+      font-weight: 300;
+    }
+    .hero-b .narrative-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .hero-b .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+    .hero-b .step .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .hero-b .step.s-roots .dot {
+      background: #b8963a;
+    }
+    .hero-b .step.s-branches .dot {
+      background: #8a7a5a;
+    }
+    .hero-b .step.s-leaves .dot {
+      background: #5a9a3a;
+    }
+    .hero-b .step .step-label {
+      font-weight: 600;
+      color: #333;
+    }
+    .hero-b .step .step-desc {
+      color: #888;
+      font-weight: 300;
+    }
+    .hero-b .cta-row {
+      display: flex;
+      gap: 0.9rem;
+    }
+    .hero-b .btn-primary {
+      padding: 0.75rem 1.8rem;
+      background: #2a3d22;
+      color: #e8f0e0;
+      border: none;
+      font-size: 0.78rem;
+      font-family: inherit;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    .hero-b .btn-ghost {
+      padding: 0.75rem 1.8rem;
+      background: none;
+      color: #555;
+      border: 1px solid #ddd;
+      font-size: 0.78rem;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    /* ═══ C ═══ */
+    .hero-c {
+      background: #fafaf7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-c .bg-dots {
+      position: absolute;
+      inset: 0;
+      opacity: 0.025;
+      background-image: radial-gradient(circle, #000 0.7px, transparent 0.7px);
+      background-size: 22px 22px;
+    }
+    .hero-c .center-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 1.5rem;
+    }
+    .hero-c .mono-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    }
+    .hero-c h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .hero-c .subtitle {
+      font-size: 0.88rem;
+      color: #999;
+      text-align: center;
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .hero-c .diagram-area {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-c .float-label {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #e8e8e4;
+      border-radius: 6px;
+      padding: 0.55rem 0.85rem;
+      max-width: 170px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .hero-c .float-label .fl-title {
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.15rem;
+    }
+    .hero-c .float-label .fl-body {
+      font-size: 0.65rem;
+      color: #888;
+      line-height: 1.45;
+      font-weight: 300;
+    }
+    .hero-c .fl-roots {
+      bottom: 6%;
+      left: 4%;
+    }
+    .hero-c .fl-roots .fl-title {
+      color: #9a7a30;
+    }
+    .hero-c .fl-branches {
+      top: 40%;
+      right: 3%;
+    }
+    .hero-c .fl-branches .fl-title {
+      color: #6a5a3a;
+    }
+    .hero-c .fl-leaves {
+      top: 4%;
+      left: 8%;
+    }
+    .hero-c .fl-leaves .fl-title {
+      color: #3a7a2a;
+    }
+    .hero-c .cta-link {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #3a7a2a;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-c .cta-link::after {
+      content: "\2192";
+      transition: transform 0.2s;
+    }
+    .hero-c .cta-link:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* ═══ D ═══ */
+    .hero-d {
+      background: #060804;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-d .atmosphere {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 35% at 50% 46%, rgba(28, 42, 20, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 40% at 50% 72%, rgba(35, 28, 14, 0.12) 0%, transparent 60%);
+    }
+    .hero-d .ground-glow {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 12%, rgba(160, 130, 55, 0.1) 35%, rgba(160, 130, 55, 0.16) 50%, rgba(160, 130, 55, 0.1) 65%, transparent 88%);
+    }
+    .hero-d .center-col {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-d .wordmark {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(200, 210, 170, 0.25);
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+    .hero-d h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3.4rem;
+      line-height: 1.12;
+      color: #e0ecd6;
+      margin-bottom: 0.6rem;
+    }
+    .hero-d h1 em {
+      font-style: italic;
+    }
+    .hero-d h1 .w-amber {
+      color: rgba(215, 180, 105, 0.88);
+    }
+    .hero-d h1 .w-green {
+      color: rgba(135, 205, 95, 0.85);
+    }
+    .hero-d .tagline {
+      font-size: 0.84rem;
+      color: rgba(180, 190, 165, 0.3);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.2rem;
+      max-width: 440px;
+      line-height: 1.6;
+    }
+    .hero-d .tree-wrap-d {
+      margin: 0.5rem 0;
+    }
+    .hero-d .cta-pill {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.65rem 1.8rem;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(150, 180, 100, 0.1);
+      border-radius: 50px;
+      color: rgba(200, 210, 180, 0.55);
+      font-size: 0.76rem;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: all 0.3s;
+    }
+    .hero-d .cta-pill:hover {
+      background: rgba(150, 180, 100, 0.05);
+      border-color: rgba(150, 180, 100, 0.22);
+    }
+    .hero-d .cta-pill .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(150, 180, 100, 0.35);
+    }
+    .hero-d .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.025);
+    }
+    .hero-d .bottom-bar span {
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.1);
+    }
+
+    .proposal-info {
+      padding: 2.2rem 3.5rem;
+      background: #111;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .proposal-info h3 {
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #ccc;
+    }
+    .proposal-info p {
+      font-size: 0.76rem;
+      line-height: 1.7;
+      color: #666;
+      max-width: 680px;
+    }
+    .proposal-info .tags {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .proposal-info .tags span {
+      font-size: 0.58rem;
+      padding: 0.18rem 0.55rem;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 3px;
+      color: #666;
+    }
+
+    /* ═══ E ═══ */
+    .hero-e {
+      display: flex;
+      flex-direction: column;
+      background: #080a06;
+    }
+
+    /* 2x2 grid: canopy/spec-tree on top, roots/empty on bottom */
+    .hero-e .e-grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      grid-template-rows: 1fr 1fr;
+      flex: 1;
+      min-height: 0;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Ground line spanning full width between rows */
+    .hero-e .e-ground-row {
+      grid-column: 1 / -1;
+      grid-row: 1 / 2;
+      align-self: end;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 3%, rgba(200, 160, 60, 0.2) 20%, rgba(200, 160, 60, 0.35) 50%, rgba(200, 160, 60, 0.2) 80%, transparent 97%);
+      z-index: 3;
+      position: relative;
+    }
+    .hero-e .e-ground-label {
+      position: absolute;
+      left: 22%;
+      top: 0;
+      transform: translate(-50%, -130%);
+      font-size: 1em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(215, 180, 105, 0.5);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Top-left: canopy */
+    .hero-e .e-canopy {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(12, 18, 8, 1) 0%, rgba(10, 16, 7, 1) 100%);
+    }
+    .hero-e .e-canopy svg {
+      display: block;
+    }
+
+    /* Bottom-left: roots */
+    .hero-e .e-roots {
+      grid-column: 1;
+      grid-row: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(18, 14, 9, 1) 0%, rgba(14, 11, 8, 1) 100%);
+    }
+    .hero-e .e-roots svg {
+      display: block;
+    }
+
+    /* Top-right: Spec Tree */
+    .hero-e .e-spec {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1.5em 2em 1.5em 2.5em;
+      background: rgba(14, 16, 12, 1);
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+    .hero-e .e-spec-label {
+      font-size: 1em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(150, 180, 120, 0.35);
+      margin-bottom: 0.8em;
+      font-weight: 500;
+    }
+
+    /* Bottom-right: empty (future Opportunity Tree) */
+    .hero-e .e-opportunity {
+      grid-column: 2;
+      grid-row: 2;
+      background: rgba(14, 12, 10, 1);
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-e .spec-tree {
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+    .hero-e .spec-tree .st-line {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .hero-e .spec-tree .st-chrome {
+      color: rgba(255, 255, 255, 0.12);
+      user-select: none;
+      min-width: 0;
+      flex-shrink: 0;
+    }
+    .hero-e .spec-tree .st-name {
+      color: rgba(200, 210, 190, 0.55);
+    }
+    .hero-e .spec-tree .st-name.is-product {
+      color: rgba(210, 220, 200, 0.75);
+      font-weight: 600;
+    }
+    .hero-e .spec-tree .st-name.is-enabler {
+      color: rgba(160, 170, 150, 0.45);
+    }
+    .hero-e .spec-tree .st-name.is-outcome {
+      color: rgba(180, 210, 160, 0.65);
+    }
+    .hero-e .spec-tree .st-name.is-decision {
+      color: rgba(200, 180, 140, 0.45);
+      font-style: italic;
+    }
+    .hero-e .spec-tree .st-status {
+      font-size: 1em;
+      margin-left: auto;
+      padding-left: 1em;
+      flex-shrink: 0;
+    }
+    .hero-e .spec-tree .st-status.s-valid {
+      color: #4ade80;
+    }
+    .hero-e .spec-tree .st-status.s-stale {
+      color: #f59e0b;
+    }
+    .hero-e .spec-tree .st-status.s-needs {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-e .e-legend {
+      display: flex;
+      gap: 1.5em;
+      margin-top: 1.2em;
+      padding-top: 0.8em;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .hero-e .e-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      font-size: 1em;
+      color: rgba(200, 200, 190, 0.35);
+    }
+    .hero-e .e-legend-dot {
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hero-e .e-legend-dot.ld-valid {
+      background: #4ade80;
+    }
+    .hero-e .e-legend-dot.ld-stale {
+      background: #f59e0b;
+    }
+    .hero-e .e-legend-dot.ld-needs {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Footer: text + CTA */
+    .hero-e .e-footer {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 2.5em 2em 3em;
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      background: linear-gradient(180deg, rgba(12, 14, 10, 1) 0%, #080a06 100%);
+    }
+    .hero-e .e-eyebrow {
+      font-size: 1em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(180, 200, 150, 0.35);
+      margin-bottom: 0.6em;
+      font-weight: 500;
+    }
+    .hero-e .e-footer h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3em;
+      line-height: 1.18;
+      color: #e0ecd6;
+      margin-bottom: 0.4em;
+    }
+    .hero-e .e-footer h1 .w-amber {
+      color: rgba(215, 180, 105, 0.88);
+    }
+    .hero-e .e-footer h1 .w-green {
+      color: rgba(135, 205, 95, 0.85);
+      font-style: italic;
+    }
+    .hero-e .e-subtitle {
+      font-size: 1.1em;
+      color: rgba(180, 190, 165, 0.4);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 40em;
+      margin: 0 auto 1.5em;
+    }
+    .hero-e .e-cta-row-inline {
+      display: flex;
+      gap: 0.9em;
+      justify-content: center;
+    }
+    .hero-e .e-btn-primary {
+      padding: 0.6em 1.6em;
+      background: rgba(150, 180, 100, 0.08);
+      border: 1px solid rgba(150, 180, 100, 0.18);
+      color: rgba(200, 220, 170, 0.7);
+      font-size: 1em;
+      font-family: inherit;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: all 0.3s;
+    }
+    .hero-e .e-btn-primary:hover {
+      background: rgba(150, 180, 100, 0.14);
+      border-color: rgba(150, 180, 100, 0.3);
+    }
+    .hero-e .e-btn-ghost {
+      padding: 0.6em 1.6em;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(200, 200, 190, 0.4);
+      font-size: 1em;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .hero-e .e-btn-ghost:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      color: rgba(200, 200, 190, 0.6);
+    }
+    </style>
+  </head>
+  <body>
+    <nav class="proposal-nav">
+      <span class="label">Hero v4</span>
+      <button class="active" onclick="show('a')">A — Narrative</button>
+      <button onclick="show('b')">B — Split</button>
+      <button onclick="show('c')">C — Diagram</button>
+      <button onclick="show('d')">D — Cinematic</button>
+      <button onclick="show('e')">E — Dual</button>
+    </nav>
+
+    <section class="proposal active" id="pa">
+      <div class="hero hero-a">
+        <div class="layout">
+          <div class="tree-col">
+            <div id="treeA"></div>
+            <div class="ann ann-roots">Goals &amp; Understanding</div>
+            <div class="ann ann-branches">Outcome Hypotheses</div>
+            <div class="ann ann-leaves">Thriving Outcomes</div>
+          </div>
+          <div class="text-col">
+            <div class="eyebrow">Outcome Engineering</div>
+            <h1>Rooted in <span class="roots-word">understanding</span>,<br>branching toward<br><span class="leaves-word">outcomes</span></h1>
+            <p class="sub">We start beneath the surface — with your business goals and customer insight — then engineer outcome hypotheses that grow into measurable, thriving results.</p>
+            <div class="three-parts">
+              <div class="part roots-part">
+                <div class="part-title">Roots</div>
+                <div class="part-desc">Business goals and deep customer understanding form the foundation.</div>
+              </div>
+              <div class="part branches-part">
+                <div class="part-title">Branches</div>
+                <div class="part-desc">Outcome hypotheses — structured, testable paths forward.</div>
+              </div>
+              <div class="part leaves-part">
+                <div class="part-title">Leaves</div>
+                <div class="part-desc">Thriving outcomes that prove the structure works.</div>
+              </div>
+            </div>
+            <a href="#" class="cta">Begin a conversation →</a>
+          </div>
+        </div>
+      </div>
+      <div class="proposal-info">
+        <h3>A — Full Narrative</h3>
+        <p>Side-by-side: the full tree with layer annotations on the left, the value proposition on the right. Teaches the framework on first contact.</p>
+        <div class="tags"><span>Dark</span><span>Annotated</span><span>Explicit metaphor</span><span>Side-by-side</span></div>
+      </div>
+    </section>
+
+    <section class="proposal" id="pb">
+      <div class="hero hero-b">
+        <div class="left-panel">
+          <div id="treeB"></div>
+          <div class="ground-band"></div>
+          <div class="zone-label zone-below">Below the surface</div>
+          <div class="zone-label zone-above">Visible growth</div>
+        </div>
+        <div class="right-panel">
+          <div class="tag">Outcome Engineering</div>
+          <h1>What grows above<br>depends on what's<br><span class="hl-amber">planted below</span></h1>
+          <p>Most strategies start with solutions. We start with roots — your business goals and the people you serve — and engineer upward through testable hypotheses to outcomes you can see and measure.</p>
+          <div class="narrative-steps">
+            <div class="step s-roots">
+              <div class="dot"></div>
+              <div><span class="step-label">Roots</span> <span class="step-desc">— Business goals, customer understanding</span></div>
+            </div>
+            <div class="step s-branches">
+              <div class="dot"></div>
+              <div><span class="step-label">Branches</span> <span class="step-desc">— Outcome hypotheses, structured paths</span></div>
+            </div>
+            <div class="step s-leaves">
+              <div class="dot"></div>
+              <div><span class="step-label">Leaves</span> <span class="step-desc">— Thriving, measurable outcomes</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <button class="btn-primary">Explore Our Method</button>
+            <button class="btn-ghost">Case Studies</button>
+          </div>
+        </div>
+      </div>
+      <div class="proposal-info">
+        <h3>B — Split Composition</h3>
+        <p>Full tree bisected by a ground-line glow. The ground-line motif reinforces that visible outcomes depend on invisible foundational work.</p>
+        <div class="tags"><span>Split</span><span>Ground line</span><span>Light + Dark</span><span>Narrative steps</span></div>
+      </div>
+    </section>
+
+    <section class="proposal" id="pc">
+      <div class="hero hero-c">
+        <div class="bg-dots"></div>
+        <div class="center-layout">
+          <div class="mono-label">// Outcome Engineering</div>
+          <h1>The anatomy of an outcome</h1>
+          <p class="subtitle">Every result is a living structure. We engineer all three layers.</p>
+          <div class="diagram-area">
+            <div id="treeC"></div>
+            <div class="float-label fl-roots">
+              <div class="fl-title">Roots</div>
+              <div class="fl-body">Business goals and customer understanding — the invisible foundation everything depends on.</div>
+            </div>
+            <div class="float-label fl-branches">
+              <div class="fl-title">Branches</div>
+              <div class="fl-body">Outcome hypotheses — structured, testable paths that connect goals to outcomes.</div>
+            </div>
+            <div class="float-label fl-leaves">
+              <div class="fl-title">Leaves</div>
+              <div class="fl-body">Thriving outcomes — measurable proof the structure beneath is sound.</div>
+            </div>
+          </div>
+          <a href="#" class="cta-link">See our method in practice</a>
+        </div>
+      </div>
+      <div class="proposal-info">
+        <h3>C — Annotated Diagram</h3>
+        <p>The tree as a technical schematic on a dot-grid surface with floating annotation cards. The engineering identity is strongest here.</p>
+        <div class="tags"><span>Light</span><span>Diagram</span><span>Annotation cards</span><span>Engineering tone</span></div>
+      </div>
+    </section>
+
+    <section class="proposal" id="pd">
+      <div class="hero hero-d">
+        <div class="atmosphere"></div>
+        <div class="ground-glow"></div>
+        <div class="center-col">
+          <div class="wordmark">Outcome Engineering</div>
+          <h1>From <em class="w-amber">deep roots</em><br>to <em class="w-green">living proof</em></h1>
+          <div class="tagline">We engineer the full structure — from the business goals beneath to the thriving outcomes above.</div>
+          <div class="tree-wrap-d" id="treeD"></div>
+          <a href="#" class="cta-pill"><span class="dot"></span> Start a Conversation</a>
+        </div>
+        <div class="bottom-bar">
+          <span>Roots · Branches · Leaves</span>
+          <span>Outcome Engineering</span>
+        </div>
+      </div>
+      <div class="proposal-info">
+        <h3>D — Cinematic Emergence</h3>
+        <p>The full tree emerges from darkness with an amber ground-glow at the soil line. Color encodes the metaphor: amber for roots, green for leaves.</p>
+        <div class="tags"><span>Dark</span><span>Cinematic</span><span>Full tree</span><span>Color-coded</span></div>
+      </div>
+    </section>
+
+    <section class="proposal" id="pe">
+      <div class="hero hero-e">
+        <div class="e-grid">
+          <div class="e-canopy" id="treeCanopy"></div>
+          <div class="e-spec">
+            <div class="e-spec-label">The Spec Tree</div>
+            <div class="spec-tree">
+              <div class="st-line"><span class="st-chrome"></span><span class="st-name is-product">spx/</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-product">spx-cli.product.md</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-decision">15-cli-framework.adr.md</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">21-test-harness.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">test-harness.md</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">tests/</span></div>
+              <div class="st-line"><span class="st-chrome">│ └── </span><span class="st-name">spx-lock.yaml</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">32-parse-directory-tree.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">43-node-status.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-outcome">54-spx-tree-interpretation.outcome/</span><span class="st-status s-stale">◐ stale</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">spx-tree-interpretation.md</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name is-enabler">21-parent-child-links.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name is-outcome">43-status-rollup.outcome/</span><span class="st-status s-stale">◐ stale</span></div>
+              <div class="st-line"><span class="st-chrome">│ └── </span><span class="st-name is-outcome">54-spx-tree-status.outcome/</span><span class="st-status s-needs">○ needs work</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-outcome">76-cli-integration.outcome/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">└── </span><span class="st-name is-outcome">87-e2e-workflow.outcome/</span><span class="st-status s-needs">○ needs work</span></div>
+            </div>
+            <div class="e-legend">
+              <div class="e-legend-item"><span class="e-legend-dot ld-valid"></span> Valid</div>
+              <div class="e-legend-item"><span class="e-legend-dot ld-stale"></span> Stale</div>
+              <div class="e-legend-item"><span class="e-legend-dot ld-needs"></span> Needs work</div>
+            </div>
+          </div>
+          <div class="e-ground-row"><span class="e-ground-label">Outcome Hypothesis</span></div>
+          <div class="e-roots" id="treeRoots"></div>
+          <div class="e-opportunity"></div>
+        </div>
+        <div class="e-footer">
+          <div class="e-eyebrow">Outcome Engineering</div>
+          <h1>From <span class="w-amber">business goals</span> to <span class="w-green">validated outcomes</span></h1>
+          <p class="e-subtitle">A methodology for building software with AI agents. The Spec Tree makes the state of your product readable — which goals have evidence, which are stale, which need work.</p>
+          <div class="e-cta-row-inline">
+            <a href="#" class="e-btn-primary">Explore the methodology →</a>
+            <a href="#" class="e-btn-ghost">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="proposal-info">
+        <h3>E — Dual Visualization</h3>
+        <p>Left: the Outcome Engineering tree as conceptual metaphor. Right: the Spec Tree — the engineering artifact where specs, tests, and lock files live. The ground line is the outcome hypothesis — the interface between business goals and engineering.</p>
+        <div class="tags"><span>Dark</span><span>Split</span><span>Metaphor + Artifact</span><span>Status colors</span><span>Filesystem</span></div>
+      </div>
+    </section>
+
+    <script>
+    // ════════════════════════════════════════
+    // OUTCOME TREE v4 — Dense 3-layer canopy + dense root mass
+    // 7 branches × 3 fork levels with leaves at EACH level
+    // 7 roots × 3 fork levels with dense root mass at each
+    // Circular canopy silhouette, semicircular root silhouette
+    // ════════════════════════════════════════
+
+    const { sin, cos, sqrt, PI, floor, min, max } = Math;
+    const R = a => a * PI / 180;
+    const f = n => n.toFixed(1);
+
+    function mkRng(seed) {
+      let s = seed;
+      return () => {
+        s = (s * 16807) % 2147483647;
+        return (s - 1) / 2147483646;
+      };
+    }
+
+    const BARK = ["#2a1e14", "#241a10", "#1e1508", "#30241a", "#281c12"];
+    const ROOT_C = ["#7a6538", "#6a5530", "#8a7540", "#5a4828", "#9a8548"];
+    const LEAF_C = ["#3d9630", "#4a9e3a", "#5aae4a", "#6abf5a", "#3a8e2a", "#55b845", "#48a535", "#42a030"];
+
+    function drawBranch(x0, y0, x1, y1, w, rng, colors, ci) {
+      const dx = x1 - x0, dy = y1 - y0, len = sqrt(dx * dx + dy * dy);
+      if (len < 0.3) return "";
+      const nx = -dy / len, ny = dx / len;
+      const wb1 = len * 0.16 * (rng() - 0.5), wb2 = len * 0.13 * (rng() - 0.5);
+      return `<path d="M${f(x0)} ${f(y0)} C${f(x0 + dx * 0.3 + nx * wb1)} ${f(y0 + dy * 0.3 + ny * wb1)}, ${f(x0 + dx * 0.7 + nx * wb2)} ${f(y0 + dy * 0.7 + ny * wb2)}, ${f(x1)} ${f(y1)}" stroke="${colors[ci % colors.length]}" stroke-width="${f(w)}" stroke-linecap="round" fill="none"/>`;
+    }
+
+    // ── Leaf: slightly varied shape ──
+    function drawLeaf(cx, cy, angle, size, rng) {
+      const l = size, hw = size * 0.38, c = LEAF_C[floor(rng() * LEAF_C.length)];
+      const op = 0.75 + rng() * 0.25;
+      return `<g transform="translate(${f(cx)},${f(cy)}) rotate(${f(angle)})">
+    <path d="M0 0 C${f(-hw)} ${f(-l * .35)}, ${f(-hw * .5)} ${f(-l * .9)}, ${f(hw * .25)} ${f(-l)}
+      C${f(hw * 1.15)} ${f(-l * .9)}, ${f(hw * 1.4)} ${f(-l * .35)}, ${f(hw * .65)} 0Z"
+      fill="${c}" stroke="#1a2a10" stroke-width="0.35" opacity="${f(op)}"/>
+    <path d="M${f(hw * .32)} -0.5 L${f(hw * .32)} ${f(-l * .82)}" stroke="#2d7520" stroke-width="0.25" fill="none" opacity="0.6"/>
+  </g>`;
+    }
+
+    // ── Leaf cluster: each leaf has a visible stem from the branch point ──
+    function leafCluster(x, y, brAngle, count, leafSz, rng) {
+      let s = "";
+      const baseA = brAngle - 90;
+      const spread = min(55, 160 / max(count, 1));
+      for (let i = 0; i < count; i++) {
+        const a = baseA + (i - (count - 1) / 2) * spread + (rng() - 0.5) * 18;
+        const sz = leafSz * (0.75 + rng() * 0.4);
+        // Stem: a short visible line from branch to leaf base
+        const stemLen = 2.5 + rng() * 2.5;
+        const stemA = R(a);
+        const stemEndX = x + cos(stemA) * stemLen;
+        const stemEndY = y + sin(stemA) * stemLen;
+        // Slight curve on the stem
+        const smx = x + cos(stemA) * stemLen * 0.5 + (rng() - 0.5) * 1;
+        const smy = y + sin(stemA) * stemLen * 0.5 + (rng() - 0.5) * 1;
+        s += `<path d="M${f(x)} ${f(y)} Q${f(smx)} ${f(smy)}, ${f(stemEndX)} ${f(stemEndY)}" stroke="#3a6828" stroke-width="${f(0.4 + rng() * 0.3)}" stroke-linecap="round" fill="none" opacity="0.7"/>`;
+        // Small random offset at the stem end
+        const ox = (rng() - 0.5) * 1;
+        const oy = (rng() - 0.5) * 1;
+        s += drawLeaf(stemEndX + ox, stemEndY + oy, a, sz, rng);
+      }
+      return s;
+    }
+
+    // ── Root mass: dense fibrous cluster ──
+    function drawRootMass(cx, cy, angle, count, size, rng) {
+      let s = "";
+      for (let i = 0; i < count; i++) {
+        const a = R(angle + (i - (count - 1) / 2) * (40 / max(count, 1)) + (rng() - 0.5) * 25);
+        const l = size * (0.5 + rng() * 0.6);
+        const ex = cx + cos(a) * l, ey = cy + sin(a) * l;
+        const mx = cx + (ex - cx) * 0.5 + (rng() - 0.5) * 3;
+        const my = cy + (ey - cy) * 0.5 + (rng() - 0.5) * 3;
+        const c = ROOT_C[floor(rng() * ROOT_C.length)];
+        const w = 0.4 + rng() * 0.6;
+        const op = 0.45 + rng() * 0.4;
+        s += `<path d="M${f(cx)} ${f(cy)} Q${f(mx)} ${f(my)}, ${f(ex)} ${f(ey)}" stroke="${c}" stroke-width="${f(w)}" stroke-linecap="round" fill="none" opacity="${f(op)}"/>`;
+        // Tiny fork at tip
+        if (rng() > 0.3) {
+          const fl = l * 0.25;
+          const fa = a + (rng() - 0.5) * 0.8;
+          s += `<path d="M${f(ex)} ${f(ey)} L${f(ex + cos(fa + 0.3) * fl)} ${f(ey + sin(fa + 0.3) * fl)}" stroke="${c}" stroke-width="${f(w * 0.5)}" stroke-linecap="round" fill="none" opacity="${f(op * 0.7)}"/>`;
+          s += `<path d="M${f(ex)} ${f(ey)} L${f(ex + cos(fa - 0.3) * fl)} ${f(ey + sin(fa - 0.3) * fl)}" stroke="${c}" stroke-width="${f(w * 0.4)}" stroke-linecap="round" fill="none" opacity="${f(op * 0.6)}"/>`;
+        }
+      }
+      return s;
+    }
+
+    // ════════════════════════════════════════
+    function buildOutcomeTree() {
+      const rng = mkRng(2026);
+      let svg = "";
+      let leafCount = 0, rootMassCount = 0;
+
+      const GY = 140, TX = 100;
+
+      // Ground line
+      svg += `<line x1="5" y1="${GY}" x2="195" y2="${GY}" stroke="rgba(140,110,55,0.15)" stroke-width="0.5" stroke-dasharray="2,2"/>`;
+
+      // Trunk (short — half the previous length)
+      const ttx = TX - 1, tty = GY - 32;
+      const trunkW = 9;
+      svg += `<path d="M${TX} ${GY} C${f(TX + (rng() - 0.5) * 1.5)} ${f(GY - 10)}, ${f(TX - 1 + (rng() - 0.5) * 1.5)} ${f(GY - 22)}, ${f(ttx)} ${f(tty)}" stroke="${BARK[0]}" stroke-width="${trunkW}" stroke-linecap="round" fill="none"/>`;
+
+      // ════ CANOPY ════
+      // 7 primary branches (Level 1)
+      // Each forks into 2-4 secondary branches (Level 2)
+      // Each secondary forks into 2-3 tertiary branches (Level 3)
+      // Leaves at ALL three fork points
+
+      // Primary branches are longer to compensate for shorter trunk
+      // and maintain the circular canopy shape
+      const canopy = [
+        {
+          a: -164,
+          l: 34,
+          wr: 0.30,
+          L1leaves: 3,
+          subs: [
+            { a: -176, l: 18, L2leaves: 3, tips: [{ a: -184, l: 12, leaves: 2 }, { a: -170, l: 13, leaves: 2 }] },
+            { a: -158, l: 20, L2leaves: 2, tips: [{ a: -166, l: 13, leaves: 2 }, { a: -150, l: 12, leaves: 2 }] },
+            { a: -146, l: 16, L2leaves: 3, tips: [{ a: -155, l: 11, leaves: 2 }, { a: -138, l: 12, leaves: 2 }] },
+          ],
+        },
+        {
+          a: -142,
+          l: 38,
+          wr: 0.28,
+          L1leaves: 3,
+          subs: [
+            { a: -158, l: 18, L2leaves: 3, tips: [{ a: -168, l: 12, leaves: 2 }, { a: -150, l: 13, leaves: 2 }] },
+            { a: -138, l: 20, L2leaves: 2, tips: [{ a: -148, l: 13, leaves: 2 }, { a: -130, l: 12, leaves: 2 }] },
+            { a: -124, l: 17, L2leaves: 3, tips: [{ a: -134, l: 12, leaves: 2 }, { a: -116, l: 11, leaves: 2 }] },
+          ],
+        },
+        {
+          a: -118,
+          l: 36,
+          wr: 0.26,
+          L1leaves: 3,
+          subs: [
+            { a: -134, l: 17, L2leaves: 2, tips: [{ a: -144, l: 12, leaves: 2 }, { a: -126, l: 11, leaves: 2 }] },
+            { a: -118, l: 19, L2leaves: 3, tips: [{ a: -128, l: 12, leaves: 2 }, { a: -110, l: 13, leaves: 2 }] },
+            { a: -104, l: 16, L2leaves: 2, tips: [{ a: -114, l: 11, leaves: 2 }, { a: -96, l: 12, leaves: 2 }] },
+            { a: -92, l: 14, L2leaves: 2, tips: [{ a: -100, l: 11, leaves: 2 }] },
+          ],
+        },
+        {
+          a: -88,
+          l: 40,
+          wr: 0.32,
+          L1leaves: 4,
+          subs: [
+            { a: -106, l: 17, L2leaves: 3, tips: [{ a: -116, l: 12, leaves: 2 }, { a: -98, l: 13, leaves: 2 }] },
+            { a: -90, l: 19, L2leaves: 3, tips: [{ a: -100, l: 13, leaves: 2 }, { a: -82, l: 12, leaves: 2 }] },
+            { a: -76, l: 18, L2leaves: 2, tips: [{ a: -86, l: 12, leaves: 2 }, { a: -68, l: 13, leaves: 2 }] },
+            { a: -62, l: 15, L2leaves: 3, tips: [{ a: -72, l: 11, leaves: 2 }, { a: -54, l: 12, leaves: 2 }] },
+          ],
+        },
+        {
+          a: -58,
+          l: 36,
+          wr: 0.25,
+          L1leaves: 3,
+          subs: [
+            { a: -72, l: 17, L2leaves: 2, tips: [{ a: -82, l: 12, leaves: 2 }, { a: -64, l: 11, leaves: 2 }] },
+            { a: -56, l: 19, L2leaves: 3, tips: [{ a: -66, l: 12, leaves: 2 }, { a: -48, l: 13, leaves: 2 }] },
+            { a: -42, l: 16, L2leaves: 2, tips: [{ a: -52, l: 11, leaves: 2 }, { a: -34, l: 12, leaves: 2 }] },
+          ],
+        },
+        {
+          a: -36,
+          l: 34,
+          wr: 0.24,
+          L1leaves: 3,
+          subs: [
+            { a: -50, l: 16, L2leaves: 2, tips: [{ a: -58, l: 11, leaves: 2 }, { a: -42, l: 12, leaves: 2 }] },
+            { a: -36, l: 18, L2leaves: 3, tips: [{ a: -46, l: 12, leaves: 2 }, { a: -28, l: 11, leaves: 2 }] },
+            { a: -22, l: 15, L2leaves: 2, tips: [{ a: -32, l: 11, leaves: 2 }, { a: -14, l: 12, leaves: 2 }] },
+          ],
+        },
+        {
+          a: -14,
+          l: 30,
+          wr: 0.20,
+          L1leaves: 2,
+          subs: [
+            { a: -26, l: 16, L2leaves: 2, tips: [{ a: -34, l: 11, leaves: 2 }, { a: -18, l: 12, leaves: 2 }] },
+            { a: -10, l: 18, L2leaves: 3, tips: [{ a: -20, l: 12, leaves: 2 }, { a: -2, l: 11, leaves: 2 }] },
+            { a: 4, l: 14, L2leaves: 2, tips: [{ a: -6, l: 11, leaves: 2 }, { a: 12, l: 12, leaves: 2 }] },
+          ],
+        },
+      ];
+
+      canopy.forEach((br, bi) => {
+        const w = trunkW * br.wr;
+        const ba = R(br.a), bex = ttx + cos(ba) * br.l, bey = tty + sin(ba) * br.l;
+        svg += drawBranch(ttx, tty, bex, bey, w, rng, BARK, bi);
+
+        // LAYER 1 leaves: at end of primary branch (fork junction)
+        svg += leafCluster(bex, bey, br.a, br.L1leaves, 6.5 + rng() * 1, rng);
+        leafCount += br.L1leaves;
+
+        br.subs.forEach((sub, si) => {
+          const sw = w * (0.42 + rng() * 0.12);
+          const sa = R(sub.a), sex = bex + cos(sa) * sub.l, sey = bey + sin(sa) * sub.l;
+          svg += drawBranch(bex, bey, sex, sey, sw, rng, BARK, bi + si);
+
+          // LAYER 2 leaves: at end of secondary branch (2nd fork junction)
+          svg += leafCluster(sex, sey, sub.a, sub.L2leaves, 7 + rng() * 1.5, rng);
+          leafCount += sub.L2leaves;
+
+          sub.tips.forEach((tip, ti) => {
+            const tw = sw * (0.38 + rng() * 0.12);
+            const ta = R(tip.a), tex = sex + cos(ta) * tip.l, tey = sey + sin(ta) * tip.l;
+            svg += drawBranch(sex, sey, tex, tey, tw, rng, BARK, bi + si + ti);
+
+            // LAYER 3 leaves: at tips (outermost)
+            svg += leafCluster(tex, tey, tip.a, tip.leaves, 7.5 + rng() * 2, rng);
+            leafCount += tip.leaves;
+          });
+        });
+      });
+
+      // ════ ROOTS ════
+      // 7 primary roots, 3 fork levels, dense mass at each level
+      // Thinner strokes, amber tones, fibrous character
+
+      const rootSystem = [
+        {
+          a: 166,
+          l: 24,
+          wr: 0.24,
+          L1mass: 4,
+          subs: [
+            { a: 178, l: 14, L2mass: 5, tips: [{ a: 185, l: 10, mass: 4 }, { a: 172, l: 9, mass: 3 }] },
+            { a: 162, l: 16, L2mass: 4, tips: [{ a: 170, l: 10, mass: 4 }, { a: 155, l: 9, mass: 3 }] },
+            { a: 148, l: 13, L2mass: 5, tips: [{ a: 156, l: 9, mass: 3 }, { a: 140, l: 10, mass: 4 }] },
+          ],
+        },
+        {
+          a: 144,
+          l: 28,
+          wr: 0.22,
+          L1mass: 5,
+          subs: [
+            { a: 160, l: 14, L2mass: 4, tips: [{ a: 168, l: 9, mass: 4 }, { a: 152, l: 10, mass: 3 }] },
+            { a: 146, l: 16, L2mass: 5, tips: [{ a: 154, l: 10, mass: 4 }, { a: 138, l: 9, mass: 3 }] },
+            { a: 132, l: 13, L2mass: 4, tips: [{ a: 140, l: 9, mass: 3 }, { a: 124, l: 10, mass: 4 }] },
+          ],
+        },
+        {
+          a: 118,
+          l: 26,
+          wr: 0.20,
+          L1mass: 4,
+          subs: [
+            { a: 134, l: 13, L2mass: 4, tips: [{ a: 142, l: 9, mass: 3 }, { a: 126, l: 10, mass: 4 }] },
+            { a: 118, l: 15, L2mass: 5, tips: [{ a: 126, l: 10, mass: 4 }, { a: 110, l: 9, mass: 3 }] },
+            { a: 104, l: 12, L2mass: 4, tips: [{ a: 112, l: 9, mass: 3 }, { a: 96, l: 10, mass: 4 }] },
+            { a: 92, l: 10, L2mass: 3, tips: [{ a: 98, l: 8, mass: 3 }] },
+          ],
+        },
+        {
+          a: 90,
+          l: 30,
+          wr: 0.26,
+          L1mass: 5,
+          subs: [
+            { a: 108, l: 14, L2mass: 5, tips: [{ a: 116, l: 10, mass: 4 }, { a: 100, l: 9, mass: 3 }] },
+            { a: 92, l: 16, L2mass: 4, tips: [{ a: 100, l: 10, mass: 4 }, { a: 84, l: 9, mass: 3 }] },
+            { a: 76, l: 15, L2mass: 5, tips: [{ a: 84, l: 10, mass: 4 }, { a: 68, l: 9, mass: 3 }] },
+            { a: 62, l: 12, L2mass: 4, tips: [{ a: 70, l: 9, mass: 3 }, { a: 54, l: 10, mass: 4 }] },
+          ],
+        },
+        {
+          a: 60,
+          l: 24,
+          wr: 0.19,
+          L1mass: 4,
+          subs: [
+            { a: 74, l: 14, L2mass: 4, tips: [{ a: 82, l: 9, mass: 3 }, { a: 66, l: 10, mass: 4 }] },
+            { a: 58, l: 15, L2mass: 5, tips: [{ a: 66, l: 10, mass: 4 }, { a: 50, l: 9, mass: 3 }] },
+            { a: 44, l: 12, L2mass: 4, tips: [{ a: 52, l: 9, mass: 3 }, { a: 36, l: 10, mass: 4 }] },
+          ],
+        },
+        {
+          a: 38,
+          l: 26,
+          wr: 0.21,
+          L1mass: 4,
+          subs: [
+            { a: 52, l: 13, L2mass: 4, tips: [{ a: 60, l: 9, mass: 3 }, { a: 44, l: 10, mass: 4 }] },
+            { a: 38, l: 15, L2mass: 5, tips: [{ a: 46, l: 10, mass: 4 }, { a: 30, l: 9, mass: 3 }] },
+            { a: 24, l: 12, L2mass: 4, tips: [{ a: 32, l: 9, mass: 3 }, { a: 16, l: 10, mass: 4 }] },
+          ],
+        },
+        {
+          a: 14,
+          l: 22,
+          wr: 0.18,
+          L1mass: 3,
+          subs: [
+            { a: 26, l: 13, L2mass: 4, tips: [{ a: 34, l: 9, mass: 3 }, { a: 18, l: 10, mass: 4 }] },
+            { a: 12, l: 15, L2mass: 5, tips: [{ a: 20, l: 10, mass: 4 }, { a: 4, l: 9, mass: 3 }] },
+            { a: -2, l: 11, L2mass: 3, tips: [{ a: 6, l: 9, mass: 3 }, { a: -8, l: 10, mass: 4 }] },
+          ],
+        },
+      ];
+
+      rootSystem.forEach((rt, ri) => {
+        const w = trunkW * rt.wr * 0.6;
+        const ra = R(rt.a), rex = TX + cos(ra) * rt.l, rey = GY + sin(ra) * rt.l;
+        svg += drawBranch(TX, GY, rex, rey, w, rng, ROOT_C, ri);
+
+        // Layer 1 root mass at primary fork
+        svg += drawRootMass(rex, rey, rt.a, rt.L1mass, 5 + rng() * 2, rng);
+        rootMassCount += rt.L1mass;
+
+        rt.subs.forEach((sub, si) => {
+          const sw = w * (0.5 + rng() * 0.15);
+          const sa = R(sub.a), sex = rex + cos(sa) * sub.l, sey = rey + sin(sa) * sub.l;
+          svg += drawBranch(rex, rey, sex, sey, sw, rng, ROOT_C, ri + si);
+
+          // Layer 2 root mass
+          svg += drawRootMass(sex, sey, sub.a, sub.L2mass, 6 + rng() * 2, rng);
+          rootMassCount += sub.L2mass;
+
+          sub.tips.forEach((tip, ti) => {
+            const tw = sw * (0.45 + rng() * 0.15);
+            const ta = R(tip.a), tex = sex + cos(ta) * tip.l, tey = sey + sin(ta) * tip.l;
+            svg += drawBranch(sex, sey, tex, tey, tw, rng, ROOT_C, ri + si + ti);
+
+            // Layer 3 root mass at tips
+            svg += drawRootMass(tex, tey, tip.a, tip.mass, 7 + rng() * 3, rng);
+            rootMassCount += tip.mass;
+          });
+        });
+      });
+
+      console.log("Leaves:", leafCount, "| Root mass elements:", rootMassCount);
+      return svg;
+    }
+
+    const treeSvg = buildOutcomeTree();
+
+    function wrapTree(w, h) {
+      return `<svg viewBox="-5 -5 210 290" fill="none" xmlns="http://www.w3.org/2000/svg"
+    width="${w}" height="${h}" style="display:block">${treeSvg}</svg>`;
+    }
+
+    document.getElementById("treeA").innerHTML = wrapTree(360, 500);
+    document.getElementById("treeB").innerHTML = wrapTree(320, 445);
+    document.getElementById("treeC").innerHTML = wrapTree(300, 420);
+    document.getElementById("treeD").innerHTML = wrapTree(260, 365);
+    // E: split tree into canopy (above ground) and roots (below ground)
+    // GY=140 is the ground line in the SVG coordinate system
+    document.getElementById("treeCanopy").innerHTML = `<svg viewBox="-5 -5 210 150" fill="none" xmlns="http://www.w3.org/2000/svg"
+        width="100%" preserveAspectRatio="xMidYMax meet" style="display:block">${treeSvg}</svg>`;
+    document.getElementById("treeRoots").innerHTML = `<svg viewBox="-5 138 210 152" fill="none" xmlns="http://www.w3.org/2000/svg"
+        width="100%" preserveAspectRatio="xMidYMin meet" style="display:block">${treeSvg}</svg>`;
+
+    function show(id) {
+      document.querySelectorAll(".proposal").forEach(p => p.classList.remove("active"));
+      document.getElementById("p" + id).classList.add("active");
+      document.querySelectorAll(".proposal-nav button").forEach(b => b.classList.remove("active"));
+      event.target.classList.add("active");
+    }
+    </script>
+  </body>
+</html>
