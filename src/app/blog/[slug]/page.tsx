@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Footer from "@/components/Footer";
 import { mdxComponents } from "@/components/mdx";
@@ -49,12 +50,12 @@ export default async function BlogPost({ params }: PageProps) {
       <main className="min-h-screen flex flex-col">
         <article className="px-6 py-16 md:py-24">
           <div className="max-w-3xl mx-auto">
-            <a
+            <Link
               href="/blog"
               className="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors mb-8 inline-block"
             >
               &larr; Blog
-            </a>
+            </Link>
 
             <header className="mb-12">
               <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-4">

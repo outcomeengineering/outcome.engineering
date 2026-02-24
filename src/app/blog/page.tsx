@@ -2,6 +2,7 @@ import DocCard from "@/components/DocCard";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "@/lib/blog";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Blog — Outcome Engineering",
@@ -19,12 +20,12 @@ export default function BlogIndex() {
       <main className="min-h-screen flex flex-col">
         <div className="px-6 py-16 md:py-24">
           <div className="max-w-4xl mx-auto">
-            <a
+            <Link
               href="/"
               className="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors mb-8 inline-block"
             >
               &larr; Home
-            </a>
+            </Link>
 
             <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-4">
               Blog
