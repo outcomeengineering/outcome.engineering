@@ -466,24 +466,24 @@ pre {
 }
 
 .st-file {
-  color: rgba(200, 210, 190, 0.55);
+  color: rgba(200, 210, 190, 0.8);
 }
 
 .st-product {
-  color: rgba(210, 220, 200, 0.75);
+  color: rgba(220, 230, 210, 0.9);
   font-weight: 600;
 }
 
 .st-enabler {
-  color: rgba(160, 170, 150, 0.45);
+  color: rgba(170, 185, 160, 0.75);
 }
 
 .st-outcome {
-  color: rgba(180, 210, 160, 0.65);
+  color: rgba(180, 210, 160, 0.85);
 }
 
 .st-decision {
-  color: rgba(200, 180, 140, 0.45);
+  color: rgba(210, 190, 150, 0.75);
   font-style: italic;
 }
 
@@ -549,7 +549,7 @@ pre {
 
 .hero-annotation {
   position: absolute;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 500;
@@ -559,26 +559,26 @@ pre {
 .hero-ann-leaves {
   top: 8%;
   right: 0;
-  color: rgba(120, 185, 90, 0.45);
+  color: rgba(120, 185, 90, 0.7);
 }
 
 .hero-ann-branches {
   top: 40%;
   right: -12px;
-  color: rgba(170, 150, 120, 0.45);
+  color: rgba(170, 150, 120, 0.7);
 }
 
 .hero-ann-roots {
   bottom: 10%;
   left: 24px;
-  color: rgba(200, 170, 100, 0.5);
+  color: rgba(200, 170, 100, 0.75);
 }
 
 .hero-ground-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  align-self: center;
+  position: relative;
   height: 2px;
   background: linear-gradient(
     90deg,
@@ -588,7 +588,7 @@ pre {
     rgba(200, 160, 60, 0.25) 80%,
     transparent 97%
   );
-  z-index: 5;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -597,10 +597,10 @@ pre {
   left: 21%;
   top: 0;
   transform: translate(-50%, -140%);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(215, 180, 105, 0.55);
+  color: rgba(215, 180, 105, 0.7);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -620,7 +620,13 @@ pre {
   flex-direction: column;
   justify-content: flex-start;
   padding: 22vh 2em 1.5em 1em;
-  background: rgb(14, 16, 12);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 16vh,
+    rgb(14, 16, 12) 22vh,
+    rgb(14, 16, 12) 100%
+  );
 }
 
 .hero-scroll-hint {
@@ -636,10 +642,10 @@ pre {
 }
 
 .hero-scroll-hint span {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(200, 200, 190, 0.3);
+  color: rgba(200, 200, 190, 0.45);
   font-weight: 500;
 }
 

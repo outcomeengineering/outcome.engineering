@@ -84,10 +84,10 @@ const entries: TreeEntry[] = [
 export default function HeroSpecTree() {
   return (
     <div className="hero-spec-inner">
-      <div className="text-xs tracking-[0.14em] uppercase text-[rgba(150,180,120,0.4)] font-medium mb-3">
+      <div className="text-xs tracking-[0.14em] uppercase text-[rgba(150,180,120,0.7)] font-medium mb-3">
         The Spec Tree
       </div>
-      <div className="font-mono text-[0.82rem] leading-[1.7]">
+      <div className="font-mono text-sm leading-[1.7]">
         {entries.map((e, i) => (
           <div key={i} className="st-line">
             <span className="st-chrome">{e.chrome}</span>
@@ -96,17 +96,17 @@ export default function HeroSpecTree() {
           </div>
         ))}
       </div>
-      <div className="flex gap-6 mt-4 pt-3 border-t border-white/[0.04]">
-        <div className="flex items-center gap-[0.4em] text-xs text-[rgba(200,200,190,0.35)]">
+      <div className="flex gap-6 mt-4 pt-3 border-t border-white/[0.06]">
+        <div className="flex items-center gap-[0.4em] text-xs text-[rgba(200,200,190,0.65)]">
           <span className="w-2 h-2 rounded-full bg-[#4ade80]" />
           Valid
         </div>
-        <div className="flex items-center gap-[0.4em] text-xs text-[rgba(200,200,190,0.35)]">
+        <div className="flex items-center gap-[0.4em] text-xs text-[rgba(200,200,190,0.65)]">
           <span className="w-2 h-2 rounded-full bg-[#f59e0b]" />
           Stale
         </div>
-        <div className="flex items-center gap-[0.4em] text-xs text-[rgba(200,200,190,0.35)]">
-          <span className="w-2 h-2 rounded-full bg-[rgba(255,255,255,0.2)]" />
+        <div className="flex items-center gap-[0.4em] text-xs text-[rgba(200,200,190,0.65)]">
+          <span className="w-2 h-2 rounded-full bg-[rgba(255,255,255,0.35)]" />
           Needs work
         </div>
       </div>

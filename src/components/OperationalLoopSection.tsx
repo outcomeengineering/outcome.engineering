@@ -54,7 +54,7 @@ export default function OperationalLoopSection() {
               filename="terminal"
               language="text"
             />
-            <p className="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+            <p className="text-[var(--text-muted)] leading-relaxed mt-2">
               {cmd.description}
             </p>
           </div>

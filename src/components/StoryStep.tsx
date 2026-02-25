@@ -24,7 +24,7 @@ export default function StoryStep({ step }: { step: StoryStepData }) {
           </blockquote>
         )}
         {step.body.map((paragraph, i) => (
-          <p key={i} className="text-sm text-[var(--text-muted)] leading-relaxed">
+          <p key={i} className="text-[var(--text-muted)] leading-relaxed">
             {paragraph}
           </p>
         ))}
