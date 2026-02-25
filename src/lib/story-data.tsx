@@ -57,10 +57,10 @@ export const principleSteps: StoryStepData[] = [
   },
   {
     id: "determinism",
-    heading: "Determinism unless creation is the goal",
+    heading: "Determine context",
     quote: "Never generate what can be derived deterministically.",
     body: [
-      "The path from root to node defines what context an agent receives: ancestor specs and lower-index siblings. No keyword search. No embedding lottery.",
+      "The Spec Tree replaces heuristic context with structural context. The path from root to node defines what an agent receives: ancestor specs and lower-index siblings at each directory along the path.",
       "Curate context rather than letting agents search the codebase. Link traceability explicitly rather than inferring it. Reserve generative capacity for the parts that require it.",
     ],
     visual: tree([
@@ -84,20 +84,21 @@ export const principleSteps: StoryStepData[] = [
     ]),
   },
   {
-    id: "ask-what-matters",
-    heading: "Ask what matters",
-    quote: "Expose the maximum-leverage decisions. Let the agent handle the rest.",
+    id: "ration-rationalization",
+    heading: "Ration rationalization",
+    quote: "Decide what cascades; constrain everything else.",
     body: [
-      "The structure separates intended behavior (spec) from whether that behavior holds (tests + lock file). Humans write the hypothesis and assertions; agents write the tests and implementation.",
+      "Given latitude, agents rationalize \u2014 they construct plausible justifications for whatever choice they face, and plausible is not correct. The human\u2019s job is not to review every output but to narrow the decision space.",
+      "Make the choices that cascade furthest \u2014 outcome hypotheses, architectural constraints, product decisions \u2014 and agents propagate the consequences through every dependent node.",
     ],
     visual: tree([
-      { chrome: "", name: "54-spx-tree-interpretation.outcome/", nameClass: "st-outcome" },
-      { chrome: "\u251C\u2500\u2500 ", name: "spx-tree-interpretation.md" },
-      { chrome: "\u2502   ", name: "\u2191 human writes hypothesis + assertions", dim: true },
-      { chrome: "\u251C\u2500\u2500 ", name: "tests/" },
-      { chrome: "\u2502   ", name: "\u2191 agent writes tests + implementation", dim: true },
-      { chrome: "\u2514\u2500\u2500 ", name: "spx-lock.yaml" },
-      { chrome: "    ", name: "\u2191 system binds spec to evidence", dim: true },
+      { chrome: "", name: "spx/", nameClass: "st-product" },
+      { chrome: "\u251C\u2500\u2500 ", name: "spx-cli.product.md", nameClass: "st-product" },
+      { chrome: "\u2502   ", name: "\u2191 human decides: why this product exists", dim: true },
+      { chrome: "\u251C\u2500\u2500 ", name: "15-cli-framework.adr.md", nameClass: "st-decision" },
+      { chrome: "\u2502   ", name: "\u2191 human decides: architecture constraint", dim: true },
+      { chrome: "\u2514\u2500\u2500 ", name: "54-spx-tree-interpretation.outcome/", nameClass: "st-outcome" },
+      { chrome: "    ", name: "\u2193 agents propagate through dependent nodes", dim: true },
     ]),
   },
 ];
