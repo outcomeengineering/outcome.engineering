@@ -17,13 +17,6 @@ export default function Footer() {
         </p>
         <div className="flex gap-4">
           <a
-            href="https://docs.outcome.engineering"
-            className="link-muted"
-            aria-label="Documentation"
-          >
-            Docs
-          </a>
-          <a
             href="https://github.com/outcomeengineering/outcome.engineering"
             target="_blank"
             rel="noopener noreferrer"

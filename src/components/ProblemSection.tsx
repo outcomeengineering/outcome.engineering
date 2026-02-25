@@ -46,7 +46,7 @@ export default function ProblemSection() {
             <h3 className="font-display text-lg font-semibold mb-3 text-[var(--accent)]">
               {mode.title}
             </h3>
-            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+            <p className="text-[var(--text-muted)] leading-relaxed">
               {mode.description}
             </p>
           </div>

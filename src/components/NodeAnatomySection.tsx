@@ -36,12 +36,12 @@ export default function NodeAnatomySection() {
         </div>
         <div className="space-y-4">
           <CodeExample code={lockContent} filename="spx-lock.yaml" language="yaml" />
-          <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+          <p className="text-[var(--text-muted)] leading-relaxed">
             Every <code className="text-[var(--accent)]">blob</code>{" "}
             is a Git blob hash. The lock file records that the spec and its tests were in agreement at the time of
             writing &mdash; not that they still are.
           </p>
-          <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+          <p className="text-[var(--text-muted)] leading-relaxed">
             Edit the spec and its blob hash changes. The node is visibly stale &mdash; before anyone runs a test.
           </p>
         </div>

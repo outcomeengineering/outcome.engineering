@@ -13,11 +13,18 @@ export default function CTASection() {
           Build with outcomes, not just features
         </h2>
         <p className="text-[var(--text-muted)] mb-8 leading-relaxed">
-          The Spec Tree is open source. Read the methodology, explore the CLI, or try it in your next project.
+          The Spec Tree is open source. Explore the methodology, try the CLI, or start building with it in your next
+          project.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <a href="https://docs.outcome.engineering" className="btn-primary">
-            Read the docs
+          <a
+            href="https://github.com/outcomeengineering"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            aria-label="View on GitHub (opens in new tab)"
+          >
+            View on GitHub
             <svg
               className="w-4 h-4"
               fill="none"
@@ -32,15 +39,6 @@ export default function CTASection() {
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               />
             </svg>
-          </a>
-          <a
-            href="https://github.com/outcomeengineering"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary"
-            aria-label="View on GitHub (opens in new tab)"
-          >
-            View on GitHub
           </a>
           <a
             href="https://github.com/outcomeengineering/spx-cli"

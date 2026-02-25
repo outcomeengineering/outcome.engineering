@@ -90,7 +90,7 @@ export default function HeroSection() {
           {/* Right column: Narrative text */}
           <motion.div ref={textColRef} className="hero-text-col" style={{ y: textLiftY }}>
             <motion.div
-              className="text-[0.68rem] tracking-[0.2em] uppercase text-[rgba(180,200,150,0.45)] mb-6 font-medium"
+              className="text-xs tracking-[0.2em] uppercase text-[rgba(180,200,150,0.7)] mb-6 font-medium"
               style={{ opacity: textFade }}
             >
               Outcome Engineering
@@ -100,50 +100,57 @@ export default function HeroSection() {
               className="hero-h1 font-display text-[1.75rem] md:text-[3.2rem] leading-[1.14] text-[#e8f0e0] font-normal mb-4 relative z-10"
               style={{ marginLeft: h1MarginLeft, width: h1Width }}
             >
-              Rooted in <span className="text-[rgba(210,180,110,0.9)]">understanding</span>,
+              Rooted in <span className="text-[rgba(210,180,110,0.95)]">understanding</span>,
               <br />
               branching toward
               <br />
-              <span className="text-[rgba(140,210,100,0.9)] italic">outcomes</span>
+              <span className="text-[rgba(140,210,100,0.95)] italic">outcomes</span>
             </motion.h1>
             <motion.div style={{ opacity: textFade }}>
-              <p className="text-[0.95rem] leading-[1.75] text-[rgba(190,200,175,0.45)] mb-8 font-light">
+              <p className="text-base leading-[1.75] text-[#b8c0a8] mb-8 font-light">
                 We start beneath the surface &mdash; with your business goals and customer insight &mdash; then engineer
                 outcome hypotheses that grow into measurable, thriving results.
               </p>
-              <div className="flex gap-[1.4em] mb-8 border-t border-white/[0.06] pt-5">
+              <div className="flex gap-[1.4em] mb-8 border-t border-white/[0.08] pt-5">
                 <div className="flex-1">
-                  <div className="text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[rgba(210,180,110,0.8)] mb-1">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[#d4b870] mb-1">
                     Roots
                   </div>
-                  <div className="text-[0.72rem] leading-[1.5] text-[rgba(200,200,190,0.35)]">
+                  <div className="text-sm leading-[1.5] text-[#a8a89e]">
                     Business goals and deep customer understanding form the foundation.
                   </div>
                 </div>
                 <div className="flex-1">
-                  <div className="text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[rgba(170,150,120,0.7)] mb-1">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[#b8a078] mb-1">
                     Branches
                   </div>
-                  <div className="text-[0.72rem] leading-[1.5] text-[rgba(200,200,190,0.35)]">
+                  <div className="text-sm leading-[1.5] text-[#a8a89e]">
                     Outcome hypotheses &mdash; structured, testable paths forward.
                   </div>
                 </div>
                 <div className="flex-1">
-                  <div className="text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[rgba(120,185,90,0.8)] mb-1">
+                  <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[#7dba5a] mb-1">
                     Leaves
                   </div>
-                  <div className="text-[0.72rem] leading-[1.5] text-[rgba(200,200,190,0.35)]">
+                  <div className="text-sm leading-[1.5] text-[#a8a89e]">
                     Thriving outcomes that prove the structure works.
                   </div>
                 </div>
               </div>
               <a
-                href="https://docs.outcome.engineering"
-                className="inline-flex items-center gap-[0.6em] px-7 py-3 border border-[rgba(180,200,150,0.18)] text-[rgba(210,230,190,0.75)] text-[0.82rem] tracking-[0.05em] no-underline rounded-sm transition-all hover:bg-[rgba(180,200,150,0.07)] hover:border-[rgba(180,200,150,0.35)]"
+                href="https://github.com/outcomeengineering"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-[0.6em] px-7 py-3 border border-[rgba(180,200,150,0.25)] text-[#d0e0c0] text-sm tracking-[0.05em] no-underline rounded-sm transition-all hover:bg-[rgba(180,200,150,0.07)] hover:border-[rgba(180,200,150,0.45)]"
               >
-                Read the methodology &rarr;
+                View on GitHub &rarr;
               </a>
             </motion.div>
+          </motion.div>
+
+          {/* Ground line — inside grid so z-index is comparable with overlay */}
+          <motion.div className="hero-ground-line" style={{ opacity: groundFade }}>
+            <span>Outcome Hypothesis</span>
           </motion.div>
 
           {/* Spec tree overlay: slides up from bottom */}
@@ -151,11 +158,6 @@ export default function HeroSection() {
             <HeroSpecTree />
           </motion.div>
         </div>
-
-        {/* Ground line */}
-        <motion.div className="hero-ground-line" style={{ opacity: groundFade }}>
-          <span>Outcome Hypothesis</span>
-        </motion.div>
 
         {/* Scroll hint */}
         <motion.div className="hero-scroll-hint" style={{ opacity: scrollHintFade }}>
