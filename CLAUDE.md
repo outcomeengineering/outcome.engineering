@@ -7,12 +7,13 @@ A methodology for spec-driven development with AI agents, centered on the Spec T
 - **Brand name**: Outcome Engineering
 - **Domain**: outcome.engineering (landing page + blog), docs.outcome.engineering (Mintlify docs)
 - **GitHub org**: Outcome Engineering
-- **Repository**: https://github.com/outcomeengineering/outcome.engineering
+- **Repository**: <https://github.com/outcomeengineering/outcome.engineering>
 
 ## IMPORTANT RULES
 
 1. **Never use Claude as commit author.** All commits must use the repository owner's git identity (`Simon Heimlicher <simon.github@heimlicher.com>`), not Claude or any AI assistant. This applies to all commits, including initial commits, amendments, and rebases.
 2. **Validation must pass before committing.** Run `spx validation all` and ensure it is clean before every commit.
+3. Always use the `/spx:committing-changes` skill. Notify the user if the skill is not available.
 
 ## Development Workflow
 
