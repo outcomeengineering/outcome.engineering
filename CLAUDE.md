@@ -12,6 +12,7 @@ A methodology for spec-driven development with AI agents, centered on the Spec T
 ## IMPORTANT RULES
 
 1. **Never use Claude as commit author.** All commits must use the repository owner's git identity (`Simon Heimlicher <simon.github@heimlicher.com>`), not Claude or any AI assistant. This applies to all commits, including initial commits, amendments, and rebases.
+2. **Validation must pass before committing.** Run `spx validation all` and ensure it is clean before every commit.
 
 ## Development Workflow
 
@@ -19,14 +20,15 @@ Follow this collaboration workflow for all changes:
 
 1. **Feature branch**: Create a new branch for each change (related changes can be grouped)
 2. **Local development**: Develop on the feature branch, user validates via `pnpm dev`
-3. **Push and PR**: On user approval, push to GitHub and open a PR
+3. **Validate**: Run `spx validation all` — must be clean before committing or pushing
+4. **Push and PR**: On user approval, push to GitHub and open a PR
    - Assign `simonheimlicher` as reviewer
    - Add comment `/gemini review` to trigger Gemini review
    - `@claude` review triggers automatically via GitHub Action
-4. **Address reviews**: Wait for AI reviews, then address suggested changes
+5. **Address reviews**: Wait for AI reviews, then address suggested changes
    - Use separate commits for successful changes
    - Squash multiple failed attempts into clean commits
-5. **Final review**: User reviews and determines if ready to merge to main
+6. **Final review**: User reviews and determines if ready to merge to main
 
 ## Core Positioning
 
@@ -67,6 +69,8 @@ Blog posts about the methodology. First post: "Growing a Spec Tree for Determini
 
 ### Docs (docs.outcome.engineering) — Mintlify
 
+Source lives in the `mintlify/` folder in this repo. Published to docs.outcome.engineering.
+
 ```
 Guide tab
 ├── Getting Started (overview, spec tree, nodes)
@@ -96,8 +100,17 @@ Reference tab
 - Glassmorphism cards with backdrop blur
 - Node state colors: green (valid), amber (stale), muted gray (needs work)
 
+## CI/CD
+
+GitHub Actions workflows in `.github/workflows/` use reusable workflows from [spx-gh-actions](https://github.com/simonheimlicher/spx-gh-actions):
+
+- **`claude.yml`** — Interactive Claude assistant triggered by `@claude` mentions on issues and PRs
+- **`claude-code-review.yml`** — Automatic code review on pull request open/synchronize
+
+Both require the `CLAUDE_CODE_OAUTH_TOKEN` repository secret (configured).
+
 ## Related Work
 
-- [spx-cli](https://github.com/outcomeengineering/spx-cli) — CLI tool for managing the Spec Tree
-- [spx-claude](https://github.com/outcomeengineering/spx-claude) — Claude Code plugin marketplace for Outcome Engineering
-- [spx-gh-actions](https://github.com/outcomeengineering/spx-gh-actions) — GitHub Actions for Outcome Engineering workflows
+- [spx-cli](https://github.com/simonheimlicher/spx-cli) — CLI tool for managing the Spec Tree
+- [spx-claude](https://github.com/simonheimlicher/spx-claude) — Claude Code plugin marketplace for Outcome Engineering
+- [spx-gh-actions](https://github.com/simonheimlicher/spx-gh-actions) — GitHub Actions for Outcome Engineering workflows
