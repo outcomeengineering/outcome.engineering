@@ -1,9 +1,13 @@
+import ContextInjectionSection from "@/components/ContextInjectionSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import NodeAnatomySection from "@/components/NodeAnatomySection";
+import OperationalLoopSection from "@/components/OperationalLoopSection";
 import ProblemSection from "@/components/ProblemSection";
 import Section from "@/components/Section";
 import StoryStep from "@/components/StoryStep";
+import WhatChangesSection from "@/components/WhatChangesSection";
 import WhyOutcomesSection from "@/components/WhyOutcomesSection";
 import { principleSteps, specTreeSteps } from "@/lib/story-data";
 
@@ -34,6 +38,11 @@ export default function Home() {
             {specTreeSteps.map((step) => <StoryStep key={step.id} step={step} />)}
           </div>
         </Section>
+
+        <NodeAnatomySection />
+        <ContextInjectionSection />
+        <OperationalLoopSection />
+        <WhatChangesSection />
 
         <CTASection />
         <Footer />

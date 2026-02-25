@@ -505,6 +505,202 @@ pre {
   color: rgba(255, 255, 255, 0.2);
 }
 
+/* ===== HERO (scroll-driven Variant F) ===== */
+
+.hero-scroll-container {
+  height: 200vh;
+  position: relative;
+  background: linear-gradient(180deg, #0c1008 0%, #111a0e 40%, #0e150a 100%);
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  grid-template-rows: 1fr;
+  height: 100%;
+}
+
+.hero-tree-col {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text-col {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2em 3em;
+}
+
+.hero-annotation {
+  position: absolute;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.hero-ann-leaves {
+  top: 8%;
+  right: 0;
+  color: rgba(120, 185, 90, 0.45);
+}
+
+.hero-ann-branches {
+  top: 40%;
+  right: -12px;
+  color: rgba(170, 150, 120, 0.45);
+}
+
+.hero-ann-roots {
+  bottom: 10%;
+  left: 24px;
+  color: rgba(200, 170, 100, 0.5);
+}
+
+.hero-ground-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 3%,
+    rgba(200, 160, 60, 0.25) 20%,
+    rgba(200, 160, 60, 0.4) 50%,
+    rgba(200, 160, 60, 0.25) 80%,
+    transparent 97%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hero-ground-line span {
+  position: absolute;
+  left: 21%;
+  top: 0;
+  transform: translate(-50%, -140%);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(215, 180, 105, 0.55);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.hero-spec-overlay {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  align-content: center;
+  z-index: 3;
+}
+
+.hero-spec-inner {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 22vh 2em 1.5em 1em;
+  background: rgb(14, 16, 12);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.hero-scroll-hint span {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200, 200, 190, 0.3);
+  font-weight: 500;
+}
+
+@keyframes bounceDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.hero-scroll-hint svg {
+  animation: bounceDown 2s ease-in-out infinite;
+  color: rgba(200, 200, 190, 0.25);
+}
+
+.hero-h1 {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .hero-h1 {
+    text-align: right;
+  }
+}
+
+/* Mobile: single column, no scroll animation */
+@media (max-width: 767px) {
+  .hero-scroll-container {
+    height: auto;
+    background: linear-gradient(180deg, #0c1008 0%, #0e150a 100%);
+  }
+
+  .hero-sticky {
+    position: relative;
+    height: auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 2rem;
+  }
+
+  .hero-tree-col {
+    display: none;
+  }
+
+  .hero-text-col {
+    padding: 0;
+  }
+
+  .hero-ground-line,
+  .hero-scroll-hint,
+  .hero-spec-overlay {
+    display: none;
+  }
+}
+
 /* ===== STORY STEPS (alternating visual + text) ===== */
 
 .story-steps {

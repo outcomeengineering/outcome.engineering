@@ -43,4 +43,5 @@ next-env.d.ts
 
 # tooling
 .playwright-mcp/
+.spx/
 /dist/

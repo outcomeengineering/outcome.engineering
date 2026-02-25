@@ -20,8 +20,24 @@ const failureModes = [
 
 export default function ProblemSection() {
   return (
-    <Section id="problem" title="Three things quietly go wrong">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <Section id="problem" title="What goes wrong with AI coding agents">
+      <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
+        <p>
+          AI coding agents generate code so fast that anyone can ship features in minutes. The challenge is staying in
+          control as the codebase grows. Plans help, but they are ephemeral &mdash; the next session starts from scratch
+          and the plan is just as much a gamble as the code it was supposed to guide.
+        </p>
+        <p>
+          Spec-driven development makes instructions persistent, but progress is still defined as the sum of completed
+          tasks. Over dozens of tasks, dead code accumulates because nobody can tie the resulting code fragments back to
+          a purpose a human could understand.
+        </p>
+        <p className="text-[var(--foreground)] font-semibold">
+          Both planning and spec-driven development organise work around tasks &mdash; and tasks are the wrong unit.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
         {failureModes.map((mode, index) => (
           <div
             key={mode.title}

@@ -369,7 +369,28 @@ function buildOutcomeTree(): string {
 // Pre-compute at module level (deterministic, no side effects)
 const treeSvgContent = buildOutcomeTree();
 
-export default function OutcomeTreeSVG({ className }: { className?: string }) {
+interface OutcomeTreeSVGProps {
+  className?: string;
+  variant?: "split" | "full";
+}
+
+export default function OutcomeTreeSVG({ className, variant = "split" }: OutcomeTreeSVGProps) {
+  if (variant === "full") {
+    return (
+      <svg
+        viewBox="-5 -5 210 295"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+        style={{ display: "block", maxHeight: "85%", width: "auto" }}
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label="Outcome tree — canopy of validated outcomes above, roots of goals and understanding below"
+        dangerouslySetInnerHTML={{ __html: treeSvgContent }}
+      />
+    );
+  }
+
   return (
     <div className={className}>
       {/* Canopy (above ground line) */}
