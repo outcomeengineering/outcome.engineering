@@ -100,6 +100,14 @@ Reference tab
 - Glassmorphism cards with backdrop blur
 - Node state colors: green (valid), amber (stale), muted gray (needs work)
 
+## Playwright MCP Screenshots
+
+When using Playwright MCP's `browser_take_screenshot`, **always set the `filename` parameter** to a task-specific subdirectory under `.playwright-mcp/`. Never save screenshots to the project root.
+
+Format: `.playwright-mcp/<task-slug>/<descriptive-name>.png`
+
+Example: `.playwright-mcp/feat-landing-page/hero-initial-state.png`
+
 ## CI/CD
 
 GitHub Actions workflows in `.github/workflows/` use reusable workflows from [spx-gh-actions](https://github.com/simonheimlicher/spx-gh-actions):
