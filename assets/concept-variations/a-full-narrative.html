@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal A — Full Narrative</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .hero-a {
+      background: linear-gradient(180deg, #0c1008 0%, #111a0e 40%, #0e150a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-a .layout {
+      display: flex;
+      align-items: center;
+      gap: 4.5rem;
+      max-width: 1200px;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-a .tree-col {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .hero-a .ann {
+      position: absolute;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .hero-a .ann-roots {
+      bottom: 8%;
+      left: -48px;
+      color: rgba(200, 170, 100, 0.5);
+    }
+    .hero-a .ann-branches {
+      top: 38%;
+      right: -60px;
+      color: rgba(170, 150, 120, 0.45);
+    }
+    .hero-a .ann-leaves {
+      top: 6%;
+      right: -52px;
+      color: rgba(120, 185, 90, 0.45);
+    }
+    .hero-a .text-col {
+      max-width: 460px;
+    }
+    .hero-a .eyebrow {
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(180, 200, 150, 0.45);
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+    .hero-a h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3.4rem;
+      line-height: 1.14;
+      color: #e8f0e0;
+      margin-bottom: 1.4rem;
+    }
+    .hero-a h1 .roots-word {
+      color: rgba(210, 180, 110, 0.9);
+    }
+    .hero-a h1 .leaves-word {
+      color: rgba(140, 210, 100, 0.9);
+      font-style: italic;
+    }
+    .hero-a .sub {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: rgba(190, 200, 175, 0.45);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-a .three-parts {
+      display: flex;
+      gap: 1.6rem;
+      margin-bottom: 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 1.4rem;
+    }
+    .hero-a .part {
+      flex: 1;
+    }
+    .hero-a .part .part-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+    .hero-a .part.roots-part .part-title {
+      color: rgba(210, 180, 110, 0.8);
+    }
+    .hero-a .part.branches-part .part-title {
+      color: rgba(170, 150, 120, 0.7);
+    }
+    .hero-a .part.leaves-part .part-title {
+      color: rgba(120, 185, 90, 0.8);
+    }
+    .hero-a .part .part-desc {
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: rgba(200, 200, 190, 0.35);
+    }
+    .hero-a .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.8rem;
+      border: 1px solid rgba(180, 200, 150, 0.18);
+      color: rgba(210, 230, 190, 0.75);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .hero-a .cta:hover {
+      background: rgba(180, 200, 150, 0.07);
+      border-color: rgba(180, 200, 150, 0.35);
+    }
+    </style>
+  </head>
+  <body>
+    <div class="hero hero-a">
+      <div class="layout">
+        <div class="tree-col">
+          <div id="treeA"></div>
+          <div class="ann ann-roots">Goals &amp; Understanding</div>
+          <div class="ann ann-branches">Outcome Hypotheses</div>
+          <div class="ann ann-leaves">Thriving Outcomes</div>
+        </div>
+        <div class="text-col">
+          <div class="eyebrow">Outcome Engineering</div>
+          <h1>Rooted in <span class="roots-word">understanding</span>,<br>branching toward<br><span class="leaves-word">outcomes</span></h1>
+          <p class="sub">We start beneath the surface — with your business goals and customer insight — then engineer outcome hypotheses that grow into measurable, thriving results.</p>
+          <div class="three-parts">
+            <div class="part roots-part">
+              <div class="part-title">Roots</div>
+              <div class="part-desc">Business goals and deep customer understanding form the foundation.</div>
+            </div>
+            <div class="part branches-part">
+              <div class="part-title">Branches</div>
+              <div class="part-desc">Outcome hypotheses — structured, testable paths forward.</div>
+            </div>
+            <div class="part leaves-part">
+              <div class="part-title">Leaves</div>
+              <div class="part-desc">Thriving outcomes that prove the structure works.</div>
+            </div>
+          </div>
+          <a href="#" class="cta">Begin a conversation →</a>
+        </div>
+      </div>
+    </div>
+    <div class="proposal-info">
+      <h3>A — Full Narrative</h3>
+      <p>Side-by-side: the full tree with layer annotations on the left, the value proposition on the right. Teaches the framework on first contact.</p>
+      <div class="tags"><span>Dark</span><span>Annotated</span><span>Explicit metaphor</span><span>Side-by-side</span></div>
+    </div>
+
+    <script src="tree.js"></script>
+    <script>
+    document.getElementById("treeA").innerHTML = wrapTree(360, 500);
+    </script>
+  </body>
+</html>

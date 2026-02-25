@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal F — Scroll-Driven Hero</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .hero-f-scroll {
+      height: 200vh;
+      position: relative;
+      background: linear-gradient(180deg, #0c1008 0%, #111a0e 40%, #0e150a 100%);
+    }
+    .hero-f-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      grid-template-rows: 1fr;
+      overflow: hidden;
+      width: 100%;
+    }
+    /* Left: tree — always visible, never moves */
+    .f-tree {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .f-tree svg {
+      display: block;
+      max-height: 90%;
+      width: auto;
+    }
+    .f-ann {
+      position: absolute;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .f-ann-leaves {
+      top: 8%;
+      right: 0;
+      color: rgba(120, 185, 90, 0.45);
+    }
+    .f-ann-branches {
+      top: 40%;
+      right: -12px;
+      color: rgba(170, 150, 120, 0.45);
+    }
+    .f-ann-roots {
+      bottom: 10%;
+      left: 24px;
+      color: rgba(200, 170, 100, 0.5);
+    }
+    /* Right: Variant A text (fades out) */
+    .f-text {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2em 3em;
+      z-index: 2;
+    }
+    .f-text .f-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(180, 200, 150, 0.45);
+      margin-bottom: 1.6em;
+      font-weight: 500;
+    }
+    .f-text h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3.2rem;
+      line-height: 1.14;
+      color: #e8f0e0;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 10;
+      text-align: right;
+    }
+    .f-text h1 .roots-word {
+      color: rgba(210, 180, 110, 0.9);
+    }
+    .f-text h1 .leaves-word {
+      color: rgba(140, 210, 100, 0.9);
+      font-style: italic;
+    }
+    .f-text .f-sub {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(190, 200, 175, 0.45);
+      margin-bottom: 2em;
+      font-weight: 300;
+    }
+    .f-text .f-parts {
+      display: flex;
+      gap: 1.4em;
+      margin-bottom: 2em;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 1.2em;
+    }
+    .f-text .f-part {
+      flex: 1;
+    }
+    .f-text .f-part-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25em;
+    }
+    .f-text .f-part.roots .f-part-title {
+      color: rgba(210, 180, 110, 0.8);
+    }
+    .f-text .f-part.branches .f-part-title {
+      color: rgba(170, 150, 120, 0.7);
+    }
+    .f-text .f-part.leaves .f-part-title {
+      color: rgba(120, 185, 90, 0.8);
+    }
+    .f-text .f-part-desc {
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: rgba(200, 200, 190, 0.35);
+    }
+    .f-text .f-cta {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 0.6em;
+      padding: 0.75em 1.8em;
+      border: 1px solid rgba(180, 200, 150, 0.18);
+      color: rgba(210, 230, 190, 0.75);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .f-text .f-cta:hover {
+      background: rgba(180, 200, 150, 0.07);
+      border-color: rgba(180, 200, 150, 0.35);
+    }
+    /* Right: Spec Tree (slides up from bottom) */
+    .f-spec {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      align-content: center;
+      z-index: 3;
+      transform: translateY(100%);
+      will-change: transform;
+    }
+    .f-spec-inner {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.5em 2em 1.5em 1em;
+      background: rgba(14, 16, 12, 0.98);
+    }
+    .f-spec .f-spec-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(150, 180, 120, 0.4);
+      margin-bottom: 0.8em;
+      font-weight: 500;
+    }
+    .f-spec .spec-tree {
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+    .f-spec .st-line {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .f-spec .st-chrome {
+      color: rgba(255, 255, 255, 0.12);
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .f-spec .st-name {
+      color: rgba(200, 210, 190, 0.55);
+    }
+    .f-spec .st-name.is-product {
+      color: rgba(210, 220, 200, 0.75);
+      font-weight: 600;
+    }
+    .f-spec .st-name.is-enabler {
+      color: rgba(160, 170, 150, 0.45);
+    }
+    .f-spec .st-name.is-outcome {
+      color: rgba(180, 210, 160, 0.65);
+    }
+    .f-spec .st-name.is-decision {
+      color: rgba(200, 180, 140, 0.45);
+      font-style: italic;
+    }
+    .f-spec .st-status {
+      font-size: 0.82rem;
+      margin-left: auto;
+      padding-left: 1em;
+      flex-shrink: 0;
+    }
+    .f-spec .st-status.s-valid {
+      color: #4ade80;
+    }
+    .f-spec .st-status.s-stale {
+      color: #f59e0b;
+    }
+    .f-spec .st-status.s-needs {
+      color: rgba(255, 255, 255, 0.2);
+    }
+    .f-spec .f-legend {
+      display: flex;
+      gap: 1.5em;
+      margin-top: 1.2em;
+      padding-top: 0.8em;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .f-spec .f-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      font-size: 0.76rem;
+      color: rgba(200, 200, 190, 0.35);
+    }
+    .f-spec .f-legend-dot {
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .f-spec .f-legend-dot.ld-valid {
+      background: #4ade80;
+    }
+    .f-spec .f-legend-dot.ld-stale {
+      background: #f59e0b;
+    }
+    .f-spec .f-legend-dot.ld-needs {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    /* Ground line */
+    .f-ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 3%, rgba(200, 160, 60, 0.25) 20%, rgba(200, 160, 60, 0.4) 50%, rgba(200, 160, 60, 0.25) 80%, transparent 97%);
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .f-ground span {
+      position: absolute;
+      left: 21%;
+      top: 0;
+      transform: translate(-50%, -140%);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(215, 180, 105, 0.55);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    /* Explanation sections below hero */
+    .f-explain {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5em 2.5em 6em;
+      position: relative;
+      z-index: 1;
+    }
+    .f-explain-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5em;
+      padding: 4em 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      align-items: center;
+    }
+    .f-explain-section:last-child {
+      border-bottom: none;
+    }
+    .f-explain-section:nth-child(even) .f-explain-visual {
+      order: 2;
+    }
+    .f-explain-section:nth-child(even) .f-explain-text {
+      order: 1;
+    }
+    .f-explain-visual {
+      background: rgba(16, 18, 14, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1.5em 2em;
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: rgba(200, 210, 190, 0.5);
+      overflow: hidden;
+    }
+    .f-explain-visual .ev-hl {
+      color: rgba(210, 220, 200, 0.8);
+      font-weight: 600;
+    }
+    .f-explain-visual .ev-dim {
+      color: rgba(200, 210, 190, 0.2);
+    }
+    .f-explain-visual .ev-valid {
+      color: #4ade80;
+    }
+    .f-explain-visual .ev-stale {
+      color: #f59e0b;
+    }
+    .f-explain-visual .ev-needs {
+      color: rgba(255, 255, 255, 0.2);
+    }
+    .f-explain-visual .ev-decision {
+      color: rgba(200, 180, 140, 0.5);
+      font-style: italic;
+    }
+    .f-explain-visual .ev-enabler {
+      color: rgba(160, 170, 150, 0.5);
+    }
+    .f-explain-visual .ev-outcome {
+      color: rgba(180, 210, 160, 0.7);
+    }
+    .f-explain-visual .ev-accent {
+      color: #f59e0b;
+    }
+    .f-explain-text h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #e0ecd6;
+      margin-bottom: 0.6em;
+      line-height: 1.3;
+    }
+    .f-explain-text p {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(190, 200, 175, 0.5);
+      font-weight: 300;
+    }
+    .f-explain-text p + p {
+      margin-top: 0.8em;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="hero-f-scroll">
+      <div class="hero-f-sticky">
+        <!-- Tree: left side, always visible -->
+        <div class="f-tree" id="treeF">
+          <div class="f-ann f-ann-leaves">Thriving Outcomes</div>
+          <div class="f-ann f-ann-branches">Outcome Hypotheses</div>
+          <div class="f-ann f-ann-roots">Goals &amp; Understanding</div>
+        </div>
+
+        <!-- Text: right side, Variant A content (fades out) -->
+        <div class="f-text" id="fText">
+          <div class="f-eyebrow">Outcome Engineering</div>
+          <h1>Rooted in <span class="roots-word">understanding</span>,<br>branching toward<br><span class="leaves-word">outcomes</span></h1>
+          <p class="f-sub">We start beneath the surface — with your business goals and customer insight — then engineer outcome hypotheses that grow into measurable, thriving results.</p>
+          <div class="f-parts">
+            <div class="f-part roots">
+              <div class="f-part-title">Roots</div>
+              <div class="f-part-desc">Business goals and deep customer understanding form the foundation.</div>
+            </div>
+            <div class="f-part branches">
+              <div class="f-part-title">Branches</div>
+              <div class="f-part-desc">Outcome hypotheses — structured, testable paths forward.</div>
+            </div>
+            <div class="f-part leaves">
+              <div class="f-part-title">Leaves</div>
+              <div class="f-part-desc">Thriving outcomes that prove the structure works.</div>
+            </div>
+          </div>
+          <a href="#" class="f-cta">Begin a conversation →</a>
+        </div>
+
+        <!-- Spec Tree: slides up from bottom -->
+        <div class="f-spec" id="fSpec">
+          <div class="f-spec-inner">
+            <div class="f-spec-label">The Spec Tree</div>
+            <div class="spec-tree">
+              <div class="st-line"><span class="st-chrome"></span><span class="st-name is-product">spx/</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-product">spx-cli.product.md</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-decision">15-cli-framework.adr.md</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">21-test-harness.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">test-harness.md</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">tests/</span></div>
+              <div class="st-line"><span class="st-chrome">│ └── </span><span class="st-name">spx-lock.yaml</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">32-parse-directory-tree.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">43-node-status.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-outcome">54-spx-tree-interpretation.outcome/</span><span class="st-status s-stale">◐ stale</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">spx-tree-interpretation.md</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name is-enabler">21-parent-child-links.enabler/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name is-outcome">43-status-rollup.outcome/</span><span class="st-status s-stale">◐ stale</span></div>
+              <div class="st-line"><span class="st-chrome">│ └── </span><span class="st-name is-outcome">54-spx-tree-status.outcome/</span><span class="st-status s-needs">○ needs work</span></div>
+              <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-outcome">76-cli-integration.outcome/</span><span class="st-status s-valid">● valid</span></div>
+              <div class="st-line"><span class="st-chrome">└── </span><span class="st-name is-outcome">87-e2e-workflow.outcome/</span><span class="st-status s-needs">○ needs work</span></div>
+            </div>
+            <div class="f-legend">
+              <div class="f-legend-item"><span class="f-legend-dot ld-valid"></span> Valid</div>
+              <div class="f-legend-item"><span class="f-legend-dot ld-stale"></span> Stale</div>
+              <div class="f-legend-item"><span class="f-legend-dot ld-needs"></span> Needs work</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ground line -->
+        <div class="f-ground" id="fGround"><span>Outcome Hypothesis</span></div>
+      </div>
+    </div>
+
+    <!-- Explanation sections -->
+    <div class="f-explain">
+      <div class="f-explain-section">
+        <div class="f-explain-visual">
+          <div><span class="ev-hl">spx/</span></div>
+          <div>├── <span class="ev-hl">spx-cli.product.md</span></div>
+          <div><span class="ev-dim">├── 15-cli-framework.adr.md</span></div>
+          <div><span class="ev-dim">├── 21-test-harness.enabler/</span></div>
+          <div><span class="ev-dim">└── ...</span></div>
+        </div>
+        <div class="f-explain-text">
+          <h3>The product node anchors everything</h3>
+          <p>Every Spec Tree starts with a single product file at its root. This file captures what the product is and why it exists — the value function that every other node must trace back to.</p>
+          <p>When product learning changes, the spec still contains why it exists. There is no "what we did" — only "what it is."</p>
+        </div>
+      </div>
+
+      <div class="f-explain-section">
+        <div class="f-explain-text">
+          <h3>Decision records capture choices upfront</h3>
+          <p>ADRs and PDRs sit alongside the specs they affect. Architecture decisions (ADR) and product decisions (PDR) are captured before implementation begins.</p>
+          <p>When an agent needs context, it doesn't guess — it reads the decision record on the path from root to its current node.</p>
+        </div>
+        <div class="f-explain-visual">
+          <div><span class="ev-hl">spx/</span></div>
+          <div>├── spx-cli.product.md</div>
+          <div>├── <span class="ev-decision">15-cli-framework.adr.md</span></div>
+          <div>├── <span class="ev-decision">15-tree-structure-contract.pdr.md</span></div>
+          <div>├── <span class="ev-dim">21-test-harness.enabler/</span></div>
+          <div><span class="ev-dim">└── ...</span></div>
+        </div>
+      </div>
+
+      <div class="f-explain-section">
+        <div class="f-explain-visual">
+          <div><span class="ev-dim">spx/</span></div>
+          <div><span class="ev-dim">├── spx-cli.product.md</span></div>
+          <div><span class="ev-dim">├── 15-cli-framework.adr.md</span></div>
+          <div>├── <span class="ev-enabler">21-test-harness.enabler/</span> <span class="ev-valid">● valid</span></div>
+          <div>├── <span class="ev-enabler">32-parse-directory-tree.enabler/</span> <span class="ev-valid">● valid</span></div>
+          <div>├── <span class="ev-enabler">43-node-status.enabler/</span> <span class="ev-valid">● valid</span></div>
+          <div><span class="ev-dim">├── 54-spx-tree-interpretation.outcome/</span></div>
+          <div><span class="ev-dim">└── ...</span></div>
+        </div>
+        <div class="f-explain-text">
+          <h3>Enablers build infrastructure bottom-up</h3>
+          <p>Enabler nodes (marked with <code>.enabler</code>) are infrastructure — shared utilities, parsers, test harnesses. The numeric prefix encodes dependency order: lower numbers are dependencies for higher ones.</p>
+          <p>Index 21 (test-harness) must be valid before index 32 (parse-directory-tree) can be worked on. The tree encodes this constraint in the filename.</p>
+        </div>
+      </div>
+
+      <div class="f-explain-section">
+        <div class="f-explain-text">
+          <h3>Outcomes express testable hypotheses</h3>
+          <p>Outcome nodes (marked with <code>.outcome</code>) are different from enablers. Each begins with a belief about what change it will produce — an outcome hypothesis with testable assertions.</p>
+          <p>"We believe that aggregating child node states will let developers identify stale subtrees without inspecting each node." This is what gets tested.</p>
+        </div>
+        <div class="f-explain-visual">
+          <div><span class="ev-dim">spx/</span></div>
+          <div><span class="ev-dim">├── ...</span></div>
+          <div>├── <span class="ev-outcome">54-spx-tree-interpretation.outcome/</span> <span class="ev-stale">◐ stale</span></div>
+          <div>│ ├── spx-tree-interpretation.md</div>
+          <div>│ ├── <span class="ev-enabler">21-parent-child-links.enabler/</span> <span class="ev-valid">● valid</span></div>
+          <div>│ ├── <span class="ev-outcome">43-status-rollup.outcome/</span> <span class="ev-stale">◐ stale</span></div>
+          <div>│ └── <span class="ev-outcome">54-spx-tree-status.outcome/</span> <span class="ev-needs">○ needs work</span></div>
+          <div><span class="ev-dim">└── ...</span></div>
+        </div>
+      </div>
+
+      <div class="f-explain-section">
+        <div class="f-explain-visual">
+          <div>## spx-lock.yaml</div>
+          <div>&nbsp;</div>
+          <div>schema: <span class="ev-hl">spx-lock/v1</span></div>
+          <div>blob: <span class="ev-accent">a3b7c12</span></div>
+          <div>tests:</div>
+          <div>- path: tests/status.unit.test.ts</div>
+          <div>blob: <span class="ev-accent">9d4e5f2</span></div>
+          <div>&nbsp;</div>
+          <div><span class="ev-dim"># When either blob changes,</span></div>
+          <div><span class="ev-dim"># the node becomes</span> <span class="ev-stale">◐ stale</span></div>
+        </div>
+        <div class="f-explain-text">
+          <h3>Lock files bind specs to evidence</h3>
+          <p>Each node can have a <code>spx-lock.yaml</code> that records Git blob hashes for the spec and its tests. When either side changes, the hash breaks and the node is visibly stale — before anyone runs a test.</p>
+          <p>This is drift detection: the binding between spec and tests never silently decays.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="proposal-info">
+      <h3>F — Scroll-Driven Hero</h3>
+      <p>Starts as Variant A (tree + narrative text), then the Spec Tree slides up from the bottom while the tree stays in place. After the transition, the page scrolls into step-by-step explanation of each Spec Tree concept.</p>
+      <div class="tags"><span>Dark</span><span>Scroll-driven</span><span>Auto-transition</span><span>A→E morph</span><span>Storytelling</span></div>
+    </div>
+
+    <script src="tree.js"></script>
+    <script>
+    // F: full tree, responsive sizing
+    document.getElementById("treeF").insertAdjacentHTML(
+      "afterbegin",
+      `<svg viewBox="-5 -5 210 290" fill="none" xmlns="http://www.w3.org/2000/svg"
+        height="85%" preserveAspectRatio="xMidYMid meet" style="display:block">${treeSvg}</svg>`,
+    );
+
+    // F — Scroll-Driven Hero: A→E transition
+    (function() {
+      const scrollContainer = document.querySelector(".hero-f-scroll");
+      const fText = document.getElementById("fText");
+      const fSpec = document.getElementById("fSpec");
+      const fGround = document.getElementById("fGround");
+      const fAnns = document.querySelectorAll(".f-ann");
+      const fTree = document.getElementById("treeF");
+      const fH1 = fText ? fText.querySelector("h1") : null;
+      // Elements that fade out (everything in .f-text except h1)
+      const fTextFadeEls = fText ? fText.querySelectorAll(".f-eyebrow, .f-sub, .f-parts, .f-cta") : [];
+
+      let autoTimer = null;
+      let autoRaf = null;
+      let autoProgress = 0;
+      let userScrolled = false;
+      let resetting = false;
+
+      // Cache animation targets
+      let panelLiftY = 0; // how far .f-text lifts up
+      let h1ExpandLeft = 0; // how far h1 expands leftward to span both columns
+
+      function computeTargets() {
+        if (!fH1 || !fTree || !fText) return;
+        const h1Rect = fH1.getBoundingClientRect();
+        const treeRect = fTree.getBoundingClientRect();
+        // Lift the whole panel up so the h1 ends up near the top of the tree
+        const targetY = treeRect.top + treeRect.height * 0.05;
+        panelLiftY = targetY - h1Rect.top;
+        // Expand h1 leftward to span both columns (tree column + text padding)
+        const textPadLeft = parseFloat(getComputedStyle(fText).paddingLeft);
+        h1ExpandLeft = treeRect.width + textPadLeft;
+      }
+
+      // Compute once after layout settles
+      requestAnimationFrame(() => requestAnimationFrame(computeTargets));
+
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function getScrollProgress() {
+        if (!scrollContainer) return 0;
+        const rect = scrollContainer.getBoundingClientRect();
+        const travel = scrollContainer.offsetHeight - window.innerHeight;
+        if (travel <= 0) return 0;
+        return Math.max(0, Math.min(1, -rect.top / travel));
+      }
+
+      function applyTransition(rawProgress) {
+        // Map 0-0.85 scroll progress to 0-1 transition
+        const t = Math.max(0, Math.min(1, rawProgress / 0.85));
+        const ease = easeInOutCubic(t);
+
+        // Lift the entire text panel upward
+        if (fText) fText.style.transform = `translateY(${panelLiftY * ease}px)`;
+        // Fade out everything except h1
+        fTextFadeEls.forEach(el => {
+          el.style.opacity = 1 - ease;
+        });
+        // Expand h1 leftward across both columns, text stays in place
+        if (fH1) {
+          const expand = h1ExpandLeft * ease;
+          fH1.style.marginLeft = `${-expand}px`;
+          fH1.style.width = `calc(100% + ${expand}px)`;
+        }
+        if (fSpec) fSpec.style.transform = `translateY(${(1 - ease) * 100}%)`;
+        if (fGround) fGround.style.opacity = ease;
+        fAnns.forEach(a => {
+          a.style.opacity = 1 - ease;
+        });
+      }
+
+      function onScroll() {
+        // Ignore scroll events triggered by programmatic scrollTo during reset
+        if (resetting) return;
+
+        if (!userScrolled) {
+          userScrolled = true;
+          cancelAutoTransition();
+        }
+
+        const progress = getScrollProgress();
+        applyTransition(progress);
+      }
+
+      function startAutoTransition() {
+        if (userScrolled) return;
+        const duration = 1500; // ms
+        const startTime = performance.now();
+
+        function tick(now) {
+          if (userScrolled) return;
+          const elapsed = now - startTime;
+          autoProgress = Math.min(1, elapsed / duration);
+          applyTransition(autoProgress * 0.85); // 0.85 = full transition
+          if (autoProgress < 1) {
+            autoRaf = requestAnimationFrame(tick);
+          } else {
+            // After auto completes, sync scroll position to match visual state
+            resetting = true;
+            if (scrollContainer) {
+              const travel = scrollContainer.offsetHeight - window.innerHeight;
+              window.scrollTo({ top: scrollContainer.offsetTop + travel * 0.85, behavior: "instant" });
+            }
+            requestAnimationFrame(() => {
+              resetting = false;
+            });
+          }
+        }
+        autoRaf = requestAnimationFrame(tick);
+      }
+
+      function cancelAutoTransition() {
+        if (autoTimer) {
+          clearTimeout(autoTimer);
+          autoTimer = null;
+        }
+        if (autoRaf) {
+          cancelAnimationFrame(autoRaf);
+          autoRaf = null;
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // Start auto-transition timer
+      autoTimer = setTimeout(startAutoTransition, 3000);
+    })();
+    </script>
+  </body>
+</html>

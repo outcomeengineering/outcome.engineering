@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal B — Split Composition</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .hero-b {
+      display: flex;
+    }
+    .hero-b .left-panel {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(16, 26, 12, 1) 0%, rgba(12, 20, 9, 1) 46%, rgba(20, 16, 10, 1) 54%, rgba(18, 14, 9, 1) 100%);
+    }
+    .hero-b .ground-band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 8%, rgba(140, 110, 50, 0.18) 30%, rgba(140, 110, 50, 0.25) 50%, rgba(140, 110, 50, 0.18) 70%, transparent 92%);
+    }
+    .hero-b .zone-label {
+      position: absolute;
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .hero-b .zone-below {
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(200, 170, 100, 0.3);
+    }
+    .hero-b .zone-above {
+      top: 16%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(100, 165, 75, 0.3);
+    }
+    .hero-b .right-panel {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem 4.5rem;
+      background: #fafaf7;
+    }
+    .hero-b .right-panel .tag {
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8a9a7a;
+      margin-bottom: 1.8rem;
+      font-weight: 600;
+    }
+    .hero-b .right-panel h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      font-size: 2.8rem;
+      line-height: 1.2;
+      color: #1a1a1a;
+      margin-bottom: 1.3rem;
+    }
+    .hero-b .right-panel h1 .hl-amber {
+      color: #9a7a30;
+    }
+    .hero-b .right-panel h1 .hl-green {
+      color: #4a7a3a;
+    }
+    .hero-b .right-panel p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #777;
+      max-width: 400px;
+      margin-bottom: 1.8rem;
+      font-weight: 300;
+    }
+    .hero-b .narrative-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .hero-b .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+    .hero-b .step .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .hero-b .step.s-roots .dot {
+      background: #b8963a;
+    }
+    .hero-b .step.s-branches .dot {
+      background: #8a7a5a;
+    }
+    .hero-b .step.s-leaves .dot {
+      background: #5a9a3a;
+    }
+    .hero-b .step .step-label {
+      font-weight: 600;
+      color: #333;
+    }
+    .hero-b .step .step-desc {
+      color: #888;
+      font-weight: 300;
+    }
+    .hero-b .cta-row {
+      display: flex;
+      gap: 0.9rem;
+    }
+    .hero-b .btn-primary {
+      padding: 0.75rem 1.8rem;
+      background: #2a3d22;
+      color: #e8f0e0;
+      border: none;
+      font-size: 0.78rem;
+      font-family: inherit;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    .hero-b .btn-ghost {
+      padding: 0.75rem 1.8rem;
+      background: none;
+      color: #555;
+      border: 1px solid #ddd;
+      font-size: 0.78rem;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="hero hero-b">
+      <div class="left-panel">
+        <div id="treeB"></div>
+        <div class="ground-band"></div>
+        <div class="zone-label zone-below">Below the surface</div>
+        <div class="zone-label zone-above">Visible growth</div>
+      </div>
+      <div class="right-panel">
+        <div class="tag">Outcome Engineering</div>
+        <h1>What grows above<br>depends on what's<br><span class="hl-amber">planted below</span></h1>
+        <p>Most strategies start with solutions. We start with roots — your business goals and the people you serve — and engineer upward through testable hypotheses to outcomes you can see and measure.</p>
+        <div class="narrative-steps">
+          <div class="step s-roots">
+            <div class="dot"></div>
+            <div><span class="step-label">Roots</span> <span class="step-desc">— Business goals, customer understanding</span></div>
+          </div>
+          <div class="step s-branches">
+            <div class="dot"></div>
+            <div><span class="step-label">Branches</span> <span class="step-desc">— Outcome hypotheses, structured paths</span></div>
+          </div>
+          <div class="step s-leaves">
+            <div class="dot"></div>
+            <div><span class="step-label">Leaves</span> <span class="step-desc">— Thriving, measurable outcomes</span></div>
+          </div>
+        </div>
+        <div class="cta-row">
+          <button class="btn-primary">Explore Our Method</button>
+          <button class="btn-ghost">Case Studies</button>
+        </div>
+      </div>
+    </div>
+    <div class="proposal-info">
+      <h3>B — Split Composition</h3>
+      <p>Full tree bisected by a ground-line glow. The ground-line motif reinforces that visible outcomes depend on invisible foundational work.</p>
+      <div class="tags"><span>Split</span><span>Ground line</span><span>Light + Dark</span><span>Narrative steps</span></div>
+    </div>
+
+    <script src="tree.js"></script>
+    <script>
+    document.getElementById("treeB").innerHTML = wrapTree(320, 445);
+    </script>
+  </body>
+</html>

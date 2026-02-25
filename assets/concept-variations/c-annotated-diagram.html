@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal C — Annotated Diagram</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .hero-c {
+      background: #fafaf7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-c .bg-dots {
+      position: absolute;
+      inset: 0;
+      opacity: 0.025;
+      background-image: radial-gradient(circle, #000 0.7px, transparent 0.7px);
+      background-size: 22px 22px;
+    }
+    .hero-c .center-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 1.5rem;
+    }
+    .hero-c .mono-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    }
+    .hero-c h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .hero-c .subtitle {
+      font-size: 0.88rem;
+      color: #999;
+      text-align: center;
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .hero-c .diagram-area {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-c .float-label {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #e8e8e4;
+      border-radius: 6px;
+      padding: 0.55rem 0.85rem;
+      max-width: 170px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .hero-c .float-label .fl-title {
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.15rem;
+    }
+    .hero-c .float-label .fl-body {
+      font-size: 0.65rem;
+      color: #888;
+      line-height: 1.45;
+      font-weight: 300;
+    }
+    .hero-c .fl-roots {
+      bottom: 6%;
+      left: 4%;
+    }
+    .hero-c .fl-roots .fl-title {
+      color: #9a7a30;
+    }
+    .hero-c .fl-branches {
+      top: 40%;
+      right: 3%;
+    }
+    .hero-c .fl-branches .fl-title {
+      color: #6a5a3a;
+    }
+    .hero-c .fl-leaves {
+      top: 4%;
+      left: 8%;
+    }
+    .hero-c .fl-leaves .fl-title {
+      color: #3a7a2a;
+    }
+    .hero-c .cta-link {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #3a7a2a;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-c .cta-link::after {
+      content: "\2192";
+      transition: transform 0.2s;
+    }
+    .hero-c .cta-link:hover::after {
+      transform: translateX(4px);
+    }
+    </style>
+  </head>
+  <body>
+    <div class="hero hero-c">
+      <div class="bg-dots"></div>
+      <div class="center-layout">
+        <div class="mono-label">// Outcome Engineering</div>
+        <h1>The anatomy of an outcome</h1>
+        <p class="subtitle">Every result is a living structure. We engineer all three layers.</p>
+        <div class="diagram-area">
+          <div id="treeC"></div>
+          <div class="float-label fl-roots">
+            <div class="fl-title">Roots</div>
+            <div class="fl-body">Business goals and customer understanding — the invisible foundation everything depends on.</div>
+          </div>
+          <div class="float-label fl-branches">
+            <div class="fl-title">Branches</div>
+            <div class="fl-body">Outcome hypotheses — structured, testable paths that connect goals to outcomes.</div>
+          </div>
+          <div class="float-label fl-leaves">
+            <div class="fl-title">Leaves</div>
+            <div class="fl-body">Thriving outcomes — measurable proof the structure beneath is sound.</div>
+          </div>
+        </div>
+        <a href="#" class="cta-link">See our method in practice</a>
+      </div>
+    </div>
+    <div class="proposal-info">
+      <h3>C — Annotated Diagram</h3>
+      <p>The tree as a technical schematic on a dot-grid surface with floating annotation cards. The engineering identity is strongest here.</p>
+      <div class="tags"><span>Light</span><span>Diagram</span><span>Annotation cards</span><span>Engineering tone</span></div>
+    </div>
+
+    <script src="tree.js"></script>
+    <script>
+    document.getElementById("treeC").innerHTML = wrapTree(300, 420);
+    </script>
+  </body>
+</html>

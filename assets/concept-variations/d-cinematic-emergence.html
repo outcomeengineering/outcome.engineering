@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal D — Cinematic Emergence</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .hero-d {
+      background: #060804;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-d .atmosphere {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 35% at 50% 46%, rgba(28, 42, 20, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 40% at 50% 72%, rgba(35, 28, 14, 0.12) 0%, transparent 60%);
+    }
+    .hero-d .ground-glow {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 12%, rgba(160, 130, 55, 0.1) 35%, rgba(160, 130, 55, 0.16) 50%, rgba(160, 130, 55, 0.1) 65%, transparent 88%);
+    }
+    .hero-d .center-col {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-d .wordmark {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(200, 210, 170, 0.25);
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+    .hero-d h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3.4rem;
+      line-height: 1.12;
+      color: #e0ecd6;
+      margin-bottom: 0.6rem;
+    }
+    .hero-d h1 em {
+      font-style: italic;
+    }
+    .hero-d h1 .w-amber {
+      color: rgba(215, 180, 105, 0.88);
+    }
+    .hero-d h1 .w-green {
+      color: rgba(135, 205, 95, 0.85);
+    }
+    .hero-d .tagline {
+      font-size: 0.84rem;
+      color: rgba(180, 190, 165, 0.3);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.2rem;
+      max-width: 440px;
+      line-height: 1.6;
+    }
+    .hero-d .tree-wrap-d {
+      margin: 0.5rem 0;
+    }
+    .hero-d .cta-pill {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.65rem 1.8rem;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(150, 180, 100, 0.1);
+      border-radius: 50px;
+      color: rgba(200, 210, 180, 0.55);
+      font-size: 0.76rem;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: all 0.3s;
+    }
+    .hero-d .cta-pill:hover {
+      background: rgba(150, 180, 100, 0.05);
+      border-color: rgba(150, 180, 100, 0.22);
+    }
+    .hero-d .cta-pill .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(150, 180, 100, 0.35);
+    }
+    .hero-d .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.025);
+    }
+    .hero-d .bottom-bar span {
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.1);
+    }
+    </style>
+  </head>
+  <body>
+    <div class="hero hero-d">
+      <div class="atmosphere"></div>
+      <div class="ground-glow"></div>
+      <div class="center-col">
+        <div class="wordmark">Outcome Engineering</div>
+        <h1>From <em class="w-amber">deep roots</em><br>to <em class="w-green">living proof</em></h1>
+        <div class="tagline">We engineer the full structure — from the business goals beneath to the thriving outcomes above.</div>
+        <div class="tree-wrap-d" id="treeD"></div>
+        <a href="#" class="cta-pill"><span class="dot"></span> Start a Conversation</a>
+      </div>
+      <div class="bottom-bar">
+        <span>Roots · Branches · Leaves</span>
+        <span>Outcome Engineering</span>
+      </div>
+    </div>
+    <div class="proposal-info">
+      <h3>D — Cinematic Emergence</h3>
+      <p>The full tree emerges from darkness with an amber ground-glow at the soil line. Color encodes the metaphor: amber for roots, green for leaves.</p>
+      <div class="tags"><span>Dark</span><span>Cinematic</span><span>Full tree</span><span>Color-coded</span></div>
+    </div>
+
+    <script src="tree.js"></script>
+    <script>
+    document.getElementById("treeD").innerHTML = wrapTree(260, 365);
+    </script>
+  </body>
+</html>

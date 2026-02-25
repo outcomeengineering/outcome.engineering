@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal E — Dual Visualization</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .hero-e {
+      display: flex;
+      flex-direction: column;
+      background: #080a06;
+      height: 100vh;
+    }
+
+    /* 2x2 grid: canopy/spec-tree on top, roots/empty on bottom */
+    .hero-e .e-grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      grid-template-rows: 1fr 1fr;
+      flex: 1;
+      min-height: 0;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Ground line spanning full width between rows */
+    .hero-e .e-ground-row {
+      grid-column: 1 / -1;
+      grid-row: 1 / 2;
+      align-self: end;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 3%, rgba(200, 160, 60, 0.2) 20%, rgba(200, 160, 60, 0.35) 50%, rgba(200, 160, 60, 0.2) 80%, transparent 97%);
+      z-index: 3;
+      position: relative;
+    }
+    .hero-e .e-ground-label {
+      position: absolute;
+      left: 22%;
+      top: 0;
+      transform: translate(-50%, -130%);
+      font-size: 1em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(215, 180, 105, 0.5);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Top-left: canopy */
+    .hero-e .e-canopy {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(12, 18, 8, 1) 0%, rgba(10, 16, 7, 1) 100%);
+    }
+    .hero-e .e-canopy svg {
+      display: block;
+    }
+
+    /* Bottom-left: roots */
+    .hero-e .e-roots {
+      grid-column: 1;
+      grid-row: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(18, 14, 9, 1) 0%, rgba(14, 11, 8, 1) 100%);
+    }
+    .hero-e .e-roots svg {
+      display: block;
+    }
+
+    /* Top-right: Spec Tree */
+    .hero-e .e-spec {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1.5em 2em 1.5em 2.5em;
+      background: rgba(14, 16, 12, 1);
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+    .hero-e .e-spec-label {
+      font-size: 1em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(150, 180, 120, 0.35);
+      margin-bottom: 0.8em;
+      font-weight: 500;
+    }
+
+    /* Bottom-right: empty (future Opportunity Tree) */
+    .hero-e .e-opportunity {
+      grid-column: 2;
+      grid-row: 2;
+      background: rgba(14, 12, 10, 1);
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-e .spec-tree {
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 1em;
+      line-height: 1.7;
+    }
+    .hero-e .spec-tree .st-line {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .hero-e .spec-tree .st-chrome {
+      color: rgba(255, 255, 255, 0.12);
+      user-select: none;
+      min-width: 0;
+      flex-shrink: 0;
+    }
+    .hero-e .spec-tree .st-name {
+      color: rgba(200, 210, 190, 0.55);
+    }
+    .hero-e .spec-tree .st-name.is-product {
+      color: rgba(210, 220, 200, 0.75);
+      font-weight: 600;
+    }
+    .hero-e .spec-tree .st-name.is-enabler {
+      color: rgba(160, 170, 150, 0.45);
+    }
+    .hero-e .spec-tree .st-name.is-outcome {
+      color: rgba(180, 210, 160, 0.65);
+    }
+    .hero-e .spec-tree .st-name.is-decision {
+      color: rgba(200, 180, 140, 0.45);
+      font-style: italic;
+    }
+    .hero-e .spec-tree .st-status {
+      font-size: 1em;
+      margin-left: auto;
+      padding-left: 1em;
+      flex-shrink: 0;
+    }
+    .hero-e .spec-tree .st-status.s-valid {
+      color: #4ade80;
+    }
+    .hero-e .spec-tree .st-status.s-stale {
+      color: #f59e0b;
+    }
+    .hero-e .spec-tree .st-status.s-needs {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-e .e-legend {
+      display: flex;
+      gap: 1.5em;
+      margin-top: 1.2em;
+      padding-top: 0.8em;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .hero-e .e-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      font-size: 1em;
+      color: rgba(200, 200, 190, 0.35);
+    }
+    .hero-e .e-legend-dot {
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hero-e .e-legend-dot.ld-valid {
+      background: #4ade80;
+    }
+    .hero-e .e-legend-dot.ld-stale {
+      background: #f59e0b;
+    }
+    .hero-e .e-legend-dot.ld-needs {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Footer: text + CTA */
+    .hero-e .e-footer {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 2.5em 2em 3em;
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      background: linear-gradient(180deg, rgba(12, 14, 10, 1) 0%, #080a06 100%);
+    }
+    .hero-e .e-eyebrow {
+      font-size: 1em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(180, 200, 150, 0.35);
+      margin-bottom: 0.6em;
+      font-weight: 500;
+    }
+    .hero-e .e-footer h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 3em;
+      line-height: 1.18;
+      color: #e0ecd6;
+      margin-bottom: 0.4em;
+    }
+    .hero-e .e-footer h1 .w-amber {
+      color: rgba(215, 180, 105, 0.88);
+    }
+    .hero-e .e-footer h1 .w-green {
+      color: rgba(135, 205, 95, 0.85);
+      font-style: italic;
+    }
+    .hero-e .e-subtitle {
+      font-size: 1.1em;
+      color: rgba(180, 190, 165, 0.4);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 40em;
+      margin: 0 auto 1.5em;
+    }
+    .hero-e .e-cta-row-inline {
+      display: flex;
+      gap: 0.9em;
+      justify-content: center;
+    }
+    .hero-e .e-btn-primary {
+      padding: 0.6em 1.6em;
+      background: rgba(150, 180, 100, 0.08);
+      border: 1px solid rgba(150, 180, 100, 0.18);
+      color: rgba(200, 220, 170, 0.7);
+      font-size: 1em;
+      font-family: inherit;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: all 0.3s;
+    }
+    .hero-e .e-btn-primary:hover {
+      background: rgba(150, 180, 100, 0.14);
+      border-color: rgba(150, 180, 100, 0.3);
+    }
+    .hero-e .e-btn-ghost {
+      padding: 0.6em 1.6em;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(200, 200, 190, 0.4);
+      font-size: 1em;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .hero-e .e-btn-ghost:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      color: rgba(200, 200, 190, 0.6);
+    }
+    </style>
+  </head>
+  <body>
+    <div class="hero-e">
+      <div class="e-grid">
+        <div class="e-canopy" id="treeCanopy"></div>
+        <div class="e-spec">
+          <div class="e-spec-label">The Spec Tree</div>
+          <div class="spec-tree">
+            <div class="st-line"><span class="st-chrome"></span><span class="st-name is-product">spx/</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-product">spx-cli.product.md</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-decision">15-cli-framework.adr.md</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">21-test-harness.enabler/</span><span class="st-status s-valid">● valid</span></div>
+            <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">test-harness.md</span></div>
+            <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">tests/</span></div>
+            <div class="st-line"><span class="st-chrome">│ └── </span><span class="st-name">spx-lock.yaml</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">32-parse-directory-tree.enabler/</span><span class="st-status s-valid">● valid</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-enabler">43-node-status.enabler/</span><span class="st-status s-valid">● valid</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-outcome">54-spx-tree-interpretation.outcome/</span><span class="st-status s-stale">◐ stale</span></div>
+            <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name">spx-tree-interpretation.md</span></div>
+            <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name is-enabler">21-parent-child-links.enabler/</span><span class="st-status s-valid">● valid</span></div>
+            <div class="st-line"><span class="st-chrome">│ ├── </span><span class="st-name is-outcome">43-status-rollup.outcome/</span><span class="st-status s-stale">◐ stale</span></div>
+            <div class="st-line"><span class="st-chrome">│ └── </span><span class="st-name is-outcome">54-spx-tree-status.outcome/</span><span class="st-status s-needs">○ needs work</span></div>
+            <div class="st-line"><span class="st-chrome">├── </span><span class="st-name is-outcome">76-cli-integration.outcome/</span><span class="st-status s-valid">● valid</span></div>
+            <div class="st-line"><span class="st-chrome">└── </span><span class="st-name is-outcome">87-e2e-workflow.outcome/</span><span class="st-status s-needs">○ needs work</span></div>
+          </div>
+          <div class="e-legend">
+            <div class="e-legend-item"><span class="e-legend-dot ld-valid"></span> Valid</div>
+            <div class="e-legend-item"><span class="e-legend-dot ld-stale"></span> Stale</div>
+            <div class="e-legend-item"><span class="e-legend-dot ld-needs"></span> Needs work</div>
+          </div>
+        </div>
+        <div class="e-ground-row"><span class="e-ground-label">Outcome Hypothesis</span></div>
+        <div class="e-roots" id="treeRoots"></div>
+        <div class="e-opportunity"></div>
+      </div>
+      <div class="e-footer">
+        <div class="e-eyebrow">Outcome Engineering</div>
+        <h1>From <span class="w-amber">business goals</span> to <span class="w-green">validated outcomes</span></h1>
+        <p class="e-subtitle">A methodology for building software with AI agents. The Spec Tree makes the state of your product readable — which goals have evidence, which are stale, which need work.</p>
+        <div class="e-cta-row-inline">
+          <a href="#" class="e-btn-primary">Explore the methodology →</a>
+          <a href="#" class="e-btn-ghost">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="proposal-info">
+      <h3>E — Dual Visualization</h3>
+      <p>Left: the Outcome Engineering tree as conceptual metaphor. Right: the Spec Tree — the engineering artifact where specs, tests, and lock files live. The ground line is the outcome hypothesis — the interface between business goals and engineering.</p>
+      <div class="tags"><span>Dark</span><span>Split</span><span>Metaphor + Artifact</span><span>Status colors</span><span>Filesystem</span></div>
+    </div>
+
+    <script src="tree.js"></script>
+    <script>
+    // E: split tree into canopy (above ground) and roots (below ground)
+    // GY=140 is the ground line in the SVG coordinate system
+    document.getElementById("treeCanopy").innerHTML = `<svg viewBox="-5 -5 210 150" fill="none" xmlns="http://www.w3.org/2000/svg"
+        width="100%" preserveAspectRatio="xMidYMax meet" style="display:block">${treeSvg}</svg>`;
+    document.getElementById("treeRoots").innerHTML = `<svg viewBox="-5 138 210 152" fill="none" xmlns="http://www.w3.org/2000/svg"
+        width="100%" preserveAspectRatio="xMidYMin meet" style="display:block">${treeSvg}</svg>`;
+    </script>
+  </body>
+</html>

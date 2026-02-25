@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outcome Engineering — Hero Proposals</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    .index {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+    .index h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 400;
+      font-size: 2.4rem;
+      color: #e0ecd6;
+      margin-bottom: 0.4em;
+    }
+    .index .subtitle {
+      font-size: 0.88rem;
+      color: rgba(180, 190, 165, 0.4);
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+    .proposals {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 960px;
+    }
+    .proposals a {
+      display: block;
+      padding: 1.5rem 2rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .proposals a:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .proposals .label {
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(150, 180, 120, 0.4);
+      font-weight: 500;
+      margin-bottom: 0.4em;
+    }
+    .proposals .name {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e8f0e0;
+      margin-bottom: 0.5em;
+    }
+    .proposals .desc {
+      font-size: 0.76rem;
+      line-height: 1.6;
+      color: rgba(200, 200, 190, 0.35);
+      font-weight: 300;
+    }
+    .proposals .tags {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .proposals .tags span {
+      font-size: 0.54rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 3px;
+      color: rgba(200, 200, 190, 0.3);
+    }
+    </style>
+  </head>
+  <body>
+    <div class="index">
+      <h1>Hero Proposals</h1>
+      <div class="subtitle">Outcome Engineering landing page concepts</div>
+      <div class="proposals">
+        <a href="a-full-narrative.html" target="_blank">
+          <div class="label">Proposal A</div>
+          <div class="name">Full Narrative</div>
+          <div class="desc">Side-by-side: the full tree with layer annotations on the left, the value proposition on the right.</div>
+          <div class="tags"><span>Dark</span><span>Annotated</span><span>Explicit metaphor</span><span>Side-by-side</span></div>
+        </a>
+        <a href="b-split-composition.html" target="_blank">
+          <div class="label">Proposal B</div>
+          <div class="name">Split Composition</div>
+          <div class="desc">Full tree bisected by a ground-line glow. Light right panel with narrative steps.</div>
+          <div class="tags"><span>Split</span><span>Ground line</span><span>Light + Dark</span><span>Narrative steps</span></div>
+        </a>
+        <a href="c-annotated-diagram.html" target="_blank">
+          <div class="label">Proposal C</div>
+          <div class="name">Annotated Diagram</div>
+          <div class="desc">The tree as a technical schematic on a dot-grid surface with floating annotation cards.</div>
+          <div class="tags"><span>Light</span><span>Diagram</span><span>Annotation cards</span><span>Engineering tone</span></div>
+        </a>
+        <a href="d-cinematic-emergence.html" target="_blank">
+          <div class="label">Proposal D</div>
+          <div class="name">Cinematic Emergence</div>
+          <div class="desc">The full tree emerges from darkness with an amber ground-glow at the soil line.</div>
+          <div class="tags"><span>Dark</span><span>Cinematic</span><span>Full tree</span><span>Color-coded</span></div>
+        </a>
+        <a href="e-dual-visualization.html" target="_blank">
+          <div class="label">Proposal E</div>
+          <div class="name">Dual Visualization</div>
+          <div class="desc">Left: organic tree metaphor. Right: the Spec Tree filesystem. Ground line as interface.</div>
+          <div class="tags"><span>Dark</span><span>Split</span><span>Metaphor + Artifact</span><span>Status colors</span></div>
+        </a>
+        <a href="f-scroll-driven-hero.html" target="_blank">
+          <div class="label">Proposal F</div>
+          <div class="name">Scroll-Driven Hero</div>
+          <div class="desc">Starts as Variant A, then the Spec Tree slides up from the bottom. Scrolls into step-by-step explanations.</div>
+          <div class="tags"><span>Dark</span><span>Scroll-driven</span><span>Auto-transition</span><span>Storytelling</span></div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
