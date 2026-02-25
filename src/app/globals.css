@@ -758,6 +758,15 @@ pre {
     padding: 2rem 0;
   }
 
+  /* Prevent monospace content from forcing grid items wider than the track */
+  .story-step > * {
+    min-width: 0;
+  }
+
+  .story-visual-inner {
+    overflow-x: auto;
+  }
+
   .story-steps > .story-step:nth-child(even) .story-visual,
   .story-steps > .story-step:nth-child(even) .story-text {
     order: 0;
