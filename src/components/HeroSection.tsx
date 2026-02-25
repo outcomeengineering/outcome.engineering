@@ -108,8 +108,8 @@ export default function HeroSection() {
             </motion.h1>
             <motion.div style={{ opacity: textFade }}>
               <p className="text-base leading-[1.75] text-[#b8c0a8] mb-8 font-light">
-                We start beneath the surface &mdash; with your business goals and customer insight &mdash; then engineer
-                outcome hypotheses that grow into measurable, thriving results.
+                Start with business goals and customer insight at the roots, express outcome hypotheses as testable
+                specs, and let the structure prove what works.
               </p>
               <div className="flex gap-[1.4em] mb-8 border-t border-white/[0.08] pt-5">
                 <div className="flex-1">
