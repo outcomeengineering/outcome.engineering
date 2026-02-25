@@ -700,6 +700,12 @@ pre {
     padding: 0;
   }
 
+  /* Override Framer Motion inline opacity — on mobile the scroll container is
+     shorter than the viewport so scrollYProgress≈1 and textFade=0 */
+  .hero-text-col > * {
+    opacity: 1 !important;
+  }
+
   .hero-ground-line,
   .hero-scroll-hint,
   .hero-spec-overlay {
