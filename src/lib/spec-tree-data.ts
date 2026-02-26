@@ -164,9 +164,9 @@ export const specTreeData: SpecNode = node(
         },
       ),
       node(
-        "spx-tree-interpretation",
-        "54-spx-tree-interpretation.outcome/",
-        "spx-tree-interpretation",
+        "tree-interpretation",
+        "54-tree-interpretation.outcome/",
+        "tree-interpretation",
         "outcome",
         "needs-work",
         54,
@@ -200,7 +200,7 @@ export const specTreeData: SpecNode = node(
             ),
             node(
               "spx-tree-status",
-              "54-spx-tree-status.outcome/",
+              "54-tree-status.outcome/",
               "spx-tree-status",
               "outcome",
               "needs-work",
@@ -380,9 +380,9 @@ export const specTreeDataSimplified: SpecNode = node(
         },
       ),
       node(
-        "spx-tree-interpretation",
-        "54-spx-tree-interpretation.outcome/",
-        "spx-tree-interpretation",
+        "tree-interpretation",
+        "54-tree-interpretation.outcome/",
+        "tree-interpretation",
         "outcome",
         "needs-work",
         54,
@@ -406,7 +406,7 @@ export const specTreeDataSimplified: SpecNode = node(
             ),
             node(
               "spx-tree-status",
-              "54-spx-tree-status.outcome/",
+              "54-tree-status.outcome/",
               "spx-tree-status",
               "outcome",
               "needs-work",

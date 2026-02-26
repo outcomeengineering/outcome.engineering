@@ -12,14 +12,14 @@ const contextTree = `spx/
     parse-directory-tree.md                    <-- included
   43-node-status.enabler/
     node-status.md                             <-- included
-  54-spx-tree-interpretation.outcome/
-    spx-tree-interpretation.md                 <-- included (ancestor)
+  54-tree-interpretation.outcome/
+    tree-interpretation.md                 <-- included (ancestor)
     21-parent-child-links.enabler/
       parent-child-links.md                    <-- included
     43-status-rollup.outcome/                  [TARGET]
       status-rollup.md                         <-- included
       tests/                                   -- not included
-    54-spx-tree-status.outcome/                -- not included
+    54-tree-status.outcome/                -- not included
   76-cli-integration.outcome/                  -- not included
   87-e2e-workflow.outcome/                     -- not included`;
 

@@ -136,8 +136,8 @@ spx/
 │   │       └── node-state-machine.unit.test.ts
 │   └── tests/
 │       └── node-status.unit.test.ts
-├── 54-spx-tree-interpretation.outcome/
-│   ├── spx-tree-interpretation.md
+├── 54-tree-interpretation.outcome/
+│   ├── tree-interpretation.md
 │   ├── 21-parent-child-links.enabler/
 │   │   ├── parent-child-links.md
 │   │   └── tests/
@@ -146,12 +146,12 @@ spx/
 │   │   ├── status-rollup.md
 │   │   └── tests/
 │   │       └── status.unit.test.ts
-│   ├── 54-spx-tree-status.outcome/
+│   ├── 54-tree-status.outcome/
 │   │   ├── spx-tree-status.md
 │   │   └── tests/
 │   │       └── spx-tree-status.unit.test.ts
 │   └── tests/
-│       └── spx-tree-interpretation.unit.test.ts
+│       └── tree-interpretation.unit.test.ts
 ├── 76-cli-integration.outcome/
 │   ├── cli-integration.md
 │   └── tests/
@@ -169,7 +169,7 @@ spx/
 └── AGENTS.md
 ```
 
-**Enabler nodes** (`.enabler` suffix) exist to serve other nodes — infrastructure that would be removed if all its dependents were retired. **Outcome nodes** (`.outcome` suffix) each express one hypothesis and the testable assertions that define its output. Position in the tree implies scope: `21-test-harness.enabler/` at the root level serves all nodes in the product; `21-parent-child-links.enabler/` nested inside `54-spx-tree-interpretation.outcome/` serves only its sibling nodes and their descendants. The spec file inside each node is `{slug}.md` — no type suffix, no numeric prefix. Enabler specs start with `## Enables`; outcome specs with `## Outcome`.
+**Enabler nodes** (`.enabler` suffix) exist to serve other nodes — infrastructure that would be removed if all its dependents were retired. **Outcome nodes** (`.outcome` suffix) each express one hypothesis and the testable assertions that define its output. Position in the tree implies scope: `21-test-harness.enabler/` at the root level serves all nodes in the product; `21-parent-child-links.enabler/` nested inside `54-tree-interpretation.outcome/` serves only its sibling nodes and their descendants. The spec file inside each node is `{slug}.md` — no type suffix, no numeric prefix. Enabler specs start with `## Enables`; outcome specs with `## Outcome`.
 
 When a behavior spans multiple nodes, the assertion lives in the lowest common ancestor. The ancestor's spec captures cross-cutting behaviors; child nodes handle their local concerns. If an ancestor accumulates too many cross-cutting assertions, that is a signal to extract a shared enabler at a lower index.
 
@@ -190,7 +190,7 @@ No sibling at the root level is affected. Growth is bounded: a new node touches 
 
 ## What a node looks like
 
-The spec at `54-spx-tree-interpretation.outcome/43-status-rollup.outcome/status-rollup.md`:
+The spec at `54-tree-interpretation.outcome/43-status-rollup.outcome/status-rollup.md`:
 
 ```markdown
 ## Outcome
@@ -208,7 +208,7 @@ Every assertion links to the test file meant to prove it — the `spx` CLI parse
 
 Numeric prefixes encode dependency scope. Within each directory, a lower-index item provides context to every sibling at a higher index — and to that sibling's descendants. Decisions constrain; enablers provide infrastructure; all are part of the deterministic context for higher-index nodes.
 
-The lock file at `54-spx-tree-interpretation.outcome/43-status-rollup.outcome/spx-lock.yaml`:
+The lock file at `54-tree-interpretation.outcome/43-status-rollup.outcome/spx-lock.yaml`:
 
 ```yaml
 schema: spx-lock/v1
@@ -230,7 +230,7 @@ Each node's lock file tracks only its own spec and tests. Subtree validity is ch
 
 In most agentic workflows, context is assembled heuristically — search, embeddings, tool-use defaults. The selection is hard to review and unstable as the repo grows. The Spec Tree enables deterministic context injection: the `spx` CLI walks the tree from the product level down to the target node and applies one structural rule: at each directory along the path, inject all lower-index siblings' specs. Ancestor specs along the path are always included. Test files are excluded.
 
-If an agent is assigned `54-spx-tree-interpretation.outcome/43-status-rollup.outcome`, deterministic context injection provides:
+If an agent is assigned `54-tree-interpretation.outcome/43-status-rollup.outcome`, deterministic context injection provides:
 
 ```text
 spx/
@@ -244,14 +244,14 @@ spx/
     parse-directory-tree.md                    ← index 32 < 54
   43-node-status.enabler/
     node-status.md                             ← index 43 < 54
-  54-spx-tree-interpretation.outcome/
-    spx-tree-interpretation.md                 ← ancestor spec
+  54-tree-interpretation.outcome/
+    tree-interpretation.md                 ← ancestor spec
     21-parent-child-links.enabler/
       parent-child-links.md                    ← index 21 < 43
     43-status-rollup.outcome/                  [TARGET]
       status-rollup.md                         ← target spec
       tests/                                   — ignored
-    54-spx-tree-status.outcome/                — index 54 ≥ 43
+    54-tree-status.outcome/                — index 54 ≥ 43
   76-cli-integration.outcome/                  — index 76 ≥ 54
   87-e2e-workflow.outcome/                     — index 87 ≥ 54
 ```
@@ -269,23 +269,23 @@ The tree is designed for tree filesystem browsers — VS Code, Neovim (neo-tree,
 Three commands form the core loop:
 
 ```text
-$ spx status --tree 54-spx-tree-interpretation.outcome
-54-spx-tree-interpretation.outcome/    needs work (no lock file)
+$ spx status --tree 54-tree-interpretation.outcome
+54-tree-interpretation.outcome/    needs work (no lock file)
   21-parent-child-links.enabler/       valid
   43-status-rollup.outcome/            stale
     status-rollup.md changed           (was a3b7c12, now 5e9f1d8)
-  54-spx-tree-status.outcome/          needs work (no lock file)
+  54-tree-status.outcome/          needs work (no lock file)
 
-$ spx lock 54-spx-tree-interpretation.outcome/43-status-rollup.outcome
+$ spx lock 54-tree-interpretation.outcome/43-status-rollup.outcome
 Running tests...
   tests/status.unit.test.ts            3 passed
 Lock regenerated: 43-status-rollup.outcome/spx-lock.yaml
 
-$ spx verify --tree 54-spx-tree-interpretation.outcome
-54-spx-tree-interpretation.outcome/    needs work
+$ spx verify --tree 54-tree-interpretation.outcome
+54-tree-interpretation.outcome/    needs work
   21-parent-child-links.enabler/       valid
   43-status-rollup.outcome/            valid
-  54-spx-tree-status.outcome/          needs work
+  54-tree-status.outcome/          needs work
 ```
 
 - `spx status` reads the tree and shows node states without running tests.
