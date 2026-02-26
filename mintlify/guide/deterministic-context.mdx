@@ -11,7 +11,7 @@ The `spx` CLI walks the tree from the product level down to the target node and 
 
 ## Worked example
 
-If an agent is assigned `54-spx-tree-interpretation.outcome/43-status-rollup.outcome`:
+If an agent is assigned `54-tree-interpretation.outcome/43-status-rollup.outcome`:
 
 ```text
 spx/
@@ -25,14 +25,14 @@ spx/
     parse-directory-tree.md                    ← index 32 < 54
   43-node-status.enabler/
     node-status.md                             ← index 43 < 54
-  54-spx-tree-interpretation.outcome/
-    spx-tree-interpretation.md                 ← ancestor spec
+  54-tree-interpretation.outcome/
+    tree-interpretation.md                 ← ancestor spec
     21-parent-child-links.enabler/
       parent-child-links.md                    ← index 21 < 43
     43-status-rollup.outcome/                  [TARGET]
       status-rollup.md                         ← target spec
       tests/                                   — ignored
-    54-spx-tree-status.outcome/                — index 54 ≥ 43
+    54-tree-status.outcome/                — index 54 ≥ 43
   76-cli-integration.outcome/                  — index 76 ≥ 54
   87-e2e-workflow.outcome/                     — index 87 ≥ 54
 ```

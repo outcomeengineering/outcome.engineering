@@ -1,23 +1,23 @@
 import CodeExample from "@/components/CodeExample";
 import Section from "@/components/Section";
 
-const statusOutput = `$ spx status --tree 54-spx-tree-interpretation.outcome
-54-spx-tree-interpretation.outcome/    needs work (no lock file)
+const statusOutput = `$ spx status --tree 54-tree-interpretation.outcome
+54-tree-interpretation.outcome/    needs work (no lock file)
   21-parent-child-links.enabler/       valid
   43-status-rollup.outcome/            stale
     status-rollup.md changed           (was a3b7c12, now 5e9f1d8)
-  54-spx-tree-status.outcome/          needs work (no lock file)`;
+  54-tree-status.outcome/          needs work (no lock file)`;
 
-const lockOutput = `$ spx lock 54-spx-tree-interpretation.outcome/43-status-rollup.outcome
+const lockOutput = `$ spx lock 54-tree-interpretation.outcome/43-status-rollup.outcome
 Running tests...
   tests/status.unit.test.ts            3 passed
 Lock regenerated: 43-status-rollup.outcome/spx-lock.yaml`;
 
-const verifyOutput = `$ spx verify --tree 54-spx-tree-interpretation.outcome
-54-spx-tree-interpretation.outcome/    needs work
+const verifyOutput = `$ spx verify --tree 54-tree-interpretation.outcome
+54-tree-interpretation.outcome/    needs work
   21-parent-child-links.enabler/       valid
   43-status-rollup.outcome/            valid
-  54-spx-tree-status.outcome/          needs work`;
+  54-tree-status.outcome/          needs work`;
 
 const commands = [
   {

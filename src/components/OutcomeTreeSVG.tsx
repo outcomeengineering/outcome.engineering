@@ -378,11 +378,11 @@ export default function OutcomeTreeSVG({ className, variant = "split" }: Outcome
   if (variant === "full") {
     return (
       <svg
-        viewBox="-5 -5 210 295"
+        viewBox="3 29 194 180"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={className}
-        style={{ display: "block", maxHeight: "85%", width: "auto" }}
+        style={{ display: "block", width: "100%" }}
         preserveAspectRatio="xMidYMid meet"
         role="img"
         aria-label="Outcome tree — canopy of validated outcomes above, roots of goals and understanding below"

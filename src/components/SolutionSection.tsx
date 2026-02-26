@@ -31,8 +31,8 @@ const treeStructureCode = `spx/
 \u251C\u2500\u2500 43-node-status.enabler/
 \u2502   \u251C\u2500\u2500 node-status.md
 \u2502   \u2514\u2500\u2500 tests/
-\u251C\u2500\u2500 54-spx-tree-interpretation.outcome/
-\u2502   \u251C\u2500\u2500 spx-tree-interpretation.md
+\u251C\u2500\u2500 54-tree-interpretation.outcome/
+\u2502   \u251C\u2500\u2500 tree-interpretation.md
 \u2502   \u251C\u2500\u2500 43-status-rollup.outcome/
 \u2502   \u2514\u2500\u2500 tests/
 \u2514\u2500\u2500 76-cli-integration.outcome/

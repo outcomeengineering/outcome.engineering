@@ -41,15 +41,15 @@ export const principleSteps: StoryStepData[] = [
       },
       {
         chrome: "\u2514\u2500\u2500 ",
-        name: "54-spx-tree-interpretation.outcome/",
+        name: "54-tree-interpretation.outcome/",
         nameClass: "st-outcome",
         status: needs,
       },
-      { chrome: "    \u251C\u2500\u2500 ", name: "spx-tree-interpretation.md" },
+      { chrome: "    \u251C\u2500\u2500 ", name: "tree-interpretation.md" },
       { chrome: "    \u251C\u2500\u2500 ", name: "43-status-rollup.outcome/", nameClass: "st-outcome", status: stale },
       {
         chrome: "    \u2514\u2500\u2500 ",
-        name: "54-spx-tree-status.outcome/",
+        name: "54-tree-status.outcome/",
         nameClass: "st-outcome",
         status: needs,
       },
@@ -76,7 +76,7 @@ export const principleSteps: StoryStepData[] = [
       },
       {
         chrome: "\u2514\u2500\u2500 ",
-        name: "54-spx-tree-interpretation.outcome/",
+        name: "54-tree-interpretation.outcome/",
         nameClass: "st-outcome",
         dim: true,
       },
@@ -97,7 +97,7 @@ export const principleSteps: StoryStepData[] = [
       { chrome: "\u2502   ", name: "\u2191 human decides: why this product exists", dim: true },
       { chrome: "\u251C\u2500\u2500 ", name: "15-cli-framework.adr.md", nameClass: "st-decision" },
       { chrome: "\u2502   ", name: "\u2191 human decides: architecture constraint", dim: true },
-      { chrome: "\u2514\u2500\u2500 ", name: "54-spx-tree-interpretation.outcome/", nameClass: "st-outcome" },
+      { chrome: "\u2514\u2500\u2500 ", name: "54-tree-interpretation.outcome/", nameClass: "st-outcome" },
       { chrome: "    ", name: "\u2193 agents propagate through dependent nodes", dim: true },
     ]),
   },
@@ -158,7 +158,7 @@ export const specTreeSteps: StoryStepData[] = [
       { chrome: "\u251C\u2500\u2500 ", name: "43-node-status.enabler/", nameClass: "st-enabler", status: valid },
       {
         chrome: "\u251C\u2500\u2500 ",
-        name: "54-spx-tree-interpretation.outcome/",
+        name: "54-tree-interpretation.outcome/",
         nameClass: "st-outcome",
         dim: true,
       },
@@ -177,11 +177,11 @@ export const specTreeSteps: StoryStepData[] = [
       { chrome: "\u251C\u2500\u2500 ", name: "...", dim: true },
       {
         chrome: "\u251C\u2500\u2500 ",
-        name: "54-spx-tree-interpretation.outcome/",
+        name: "54-tree-interpretation.outcome/",
         nameClass: "st-outcome",
         status: stale,
       },
-      { chrome: "\u2502   \u251C\u2500\u2500 ", name: "spx-tree-interpretation.md" },
+      { chrome: "\u2502   \u251C\u2500\u2500 ", name: "tree-interpretation.md" },
       {
         chrome: "\u2502   \u251C\u2500\u2500 ",
         name: "21-parent-child-links.enabler/",
@@ -196,7 +196,7 @@ export const specTreeSteps: StoryStepData[] = [
       },
       {
         chrome: "\u2502   \u2514\u2500\u2500 ",
-        name: "54-spx-tree-status.outcome/",
+        name: "54-tree-status.outcome/",
         nameClass: "st-outcome",
         status: needs,
       },
