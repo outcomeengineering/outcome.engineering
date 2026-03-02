@@ -1,25 +1,21 @@
 import CodeExample from "@/components/CodeExample";
 import Section from "@/components/Section";
 
-const specContent = `## Outcome
-
-We believe that aggregating child node states into a parent status
-will let developers identify stale subtrees without inspecting
-each node individually.
+const specContent =
+  `## We believe that, by showing itemized charges per service, we will reduce billing support tickets by 40%, resulting in reduced support costs
 
 ### Assertions
 
-- A parent with all valid children reports valid
-  ([test](tests/status.unit.test.ts))
-- A parent with any stale child reports stale
-  ([test](tests/status.unit.test.ts))
-- A parent with any needs-work child needs work
-  ([test](tests/status.unit.test.ts))`;
+- A multi-service invoice shows service name, quantity,
+  and unit price per line
+  ([test](tests/line-items.unit.test.ts))
+- Invoice total equals the sum of all line items
+  ([test](tests/line-items.unit.test.ts))`;
 
 const lockContent = `schema: spx-lock/v1
 blob: a3b7c12
 tests:
-  - path: tests/status.unit.test.ts
+  - path: tests/line-items.unit.test.ts
     blob: 9d4e5f2`;
 
 export default function NodeAnatomySection() {
@@ -32,7 +28,7 @@ export default function NodeAnatomySection() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-2">
         <div>
-          <CodeExample code={specContent} filename="status-rollup.md" language="markdown" />
+          <CodeExample code={specContent} filename="line-items.md" language="markdown" />
         </div>
         <div className="space-y-4">
           <CodeExample code={lockContent} filename="spx-lock.yaml" language="yaml" />

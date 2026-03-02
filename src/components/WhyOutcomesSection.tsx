@@ -9,9 +9,10 @@ export default function WhyOutcomesSection() {
           to do, expressed as testable assertions.
         </p>
         <p>
-          Every spec begins with an outcome hypothesis: the reason this node exists, expressed as a belief about what
-          change it will produce. Assertions define what must be true about the output for the hypothesis to become
-          verifiable. There is no outcome without an output.
+          Outcome specs begin with a hypothesis: by [output], [outcome], resulting in [impact]. Enabler specs begin with
+          what they enable. The output is what the software does &mdash; testable locally by assertions. The outcome is
+          the change in customer behavior we expect &mdash; measurable only with real users. The impact is the business
+          value: increase revenue, sustain revenue, reduce costs, or avoid costs. There is no outcome without an output.
         </p>
         <p>
           Product managers and UX researchers already have the material &mdash; business goals, customer research,
