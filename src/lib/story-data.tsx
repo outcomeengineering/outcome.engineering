@@ -111,7 +111,7 @@ export const specTreeSteps: StoryStepData[] = [
     heading: "The product node anchors everything",
     body: [
       "Every Spec Tree starts with a single product file at its root. This file captures what the product is and why it exists \u2014 the value function that every other node must trace back to.",
-      "When product learning changes, the spec still contains why it exists. Every outcome has evidence because it traces back to this root.",
+      "When product learning changes, the spec still contains why it exists. Every outcome traces to this root. Assertions validate outputs locally; outcome hypotheses are validated only through real customer behavior.",
     ],
     visual: tree([
       { chrome: "", name: "spx/", nameClass: "st-product" },
@@ -125,7 +125,7 @@ export const specTreeSteps: StoryStepData[] = [
     id: "decision-records",
     heading: "Decision records capture choices upfront",
     body: [
-      "ADRs and PDRs sit alongside the specs they affect. Architecture decisions (ADR) and product decisions (PDR) are captured before implementation begins.",
+      "ADRs and PDRs sit alongside the specs they affect. ADRs capture architecture choices that constrain how outputs are produced; PDRs capture product constraints \u2014 pricing, compliance, retention \u2014 that must hold across a subtree.",
       "When an agent needs context, it doesn\u2019t guess \u2014 it reads the decision record on the path from root to its current node. Context is deterministic.",
     ],
     visual: tree([
@@ -141,7 +141,7 @@ export const specTreeSteps: StoryStepData[] = [
     id: "enablers",
     heading: "Enablers build infrastructure bottom-up",
     body: [
-      "Enabler nodes (marked with .enabler) are infrastructure \u2014 shared utilities, parsers, test harnesses. The numeric prefix encodes dependency order: lower numbers are dependencies for higher ones.",
+      "Enabler nodes (marked with .enabler) exist because at least one outcome node needs them \u2014 infrastructure that would be removed if all its dependents were retired. The numeric prefix encodes dependency order: lower numbers are dependencies for higher ones.",
       "Index 21 (test-harness) must be valid before index 32 (parse-directory-tree) can be worked on. The tree encodes this constraint in the filename.",
     ],
     visual: tree([
@@ -167,9 +167,9 @@ export const specTreeSteps: StoryStepData[] = [
   },
   {
     id: "outcomes",
-    heading: "Outcomes express testable hypotheses",
+    heading: "Outcomes state hypotheses about customer change",
     body: [
-      "Outcome nodes (marked with .outcome) each begin with a belief about what change the software will produce \u2014 an outcome hypothesis with testable assertions.",
+      "Outcome nodes (marked with .outcome) each state an outcome hypothesis \u2014 by [output], [outcome], resulting in [impact]. Assertions test the output. The outcome is a change in customer behavior that only real users can validate. The impact is the business value \u2014 increase revenue, sustain revenue, reduce costs, or avoid costs.",
       "When a spec changes, its lock file hash breaks. Parent nodes inherit the worst child state. Staleness bubbles up to the root \u2014 nothing hides. Three states \u2014 valid, stale, needs work \u2014 tell you exactly where the product stands.",
     ],
     visual: tree([

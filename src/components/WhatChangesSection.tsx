@@ -2,9 +2,9 @@ import Section from "@/components/Section";
 
 const changes = [
   {
-    title: "Goals have evidence",
+    title: "Assertions have evidence",
     description:
-      "Every assertion either has a passing test bound by a current lock file, or it doesn\u2019t. You always know which goals have evidence behind them and which don\u2019t.",
+      "Every assertion either has a passing test bound by a current lock file, or it doesn\u2019t. You always know which assertions have evidence behind them and which don\u2019t.",
   },
   {
     title: "Change propagates",

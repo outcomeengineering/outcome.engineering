@@ -22,8 +22,8 @@ export default function HeroSection() {
             <span className="text-[rgba(140,210,100,0.95)] italic">outcomes</span>
           </h1>
           <p className="text-base leading-[1.75] text-[#b8c0a8] mb-8 font-light">
-            Start with business goals and customer insight at the roots, express outcome hypotheses as testable specs,
-            and let the structure prove what works.
+            Start with business goals and customer insight at the roots, express outcome hypotheses with testable
+            assertions, and let the structure show what holds.
           </p>
           <div className="flex gap-[1.4em] mb-8 border-t border-white/[0.08] pt-5">
             <div className="flex-1">
@@ -35,13 +35,13 @@ export default function HeroSection() {
             <div className="flex-1">
               <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[#b8a078] mb-1">Branches</div>
               <div className="text-sm leading-[1.5] text-[#a8a89e]">
-                Outcome hypotheses &mdash; structured, testable paths forward.
+                Outcome hypotheses, each with assertions the code must satisfy.
               </div>
             </div>
             <div className="flex-1">
               <div className="text-xs font-semibold uppercase tracking-[0.08em] text-[#7dba5a] mb-1">Leaves</div>
               <div className="text-sm leading-[1.5] text-[#a8a89e]">
-                Thriving outcomes that prove the structure works.
+                Where output meets evidence — assertions the code must satisfy today.
               </div>
             </div>
           </div>

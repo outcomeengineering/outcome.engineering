@@ -43,5 +43,10 @@ next-env.d.ts
 
 # tooling
 .playwright-mcp/
-.spx/
 /dist/
+
+# SPX
+.spx/sessions/
+
+# Claude Code
+.claude/settings.local.json
