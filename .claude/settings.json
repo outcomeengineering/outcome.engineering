@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "frontend@spx-claude": true,
+    "typescript@spx-claude": true
+  }
+}
